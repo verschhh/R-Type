@@ -9,9 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN}}
+          fetch-depth: 0  # Fetch all history for a full clone
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use the default GITHUB_TOKEN provided by GitHub
+
       - name: Run a one-line command to mirror the repo
         run: |
-          git clone --mirror "https://github.com/EpitechPromo2026/B-CPP-500-BER-5-2-rtype-leonard.verschuere.git"
+          git clone --mirror "https://<YOUR_PAT>@github.com/EpitechPromo2026/B-CPP-500-BER-5-2-rtype-leonard.verschuere.git"

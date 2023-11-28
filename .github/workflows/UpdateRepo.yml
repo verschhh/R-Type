@@ -1,12 +1,15 @@
-name: CI_on_push
+name: CI_on_pull_request
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Run a one-line command to mirror the repo
-          run: |
-            git clone --mirror "https://github.com/EpitechPromo2026/B-CPP-500-BER-5-2-rtype-leonard.verschuere.git"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run a one-line command to mirror the repo
+        run: |
+          git clone --mirror "https://github.com/EpitechPromo2026/B-CPP-500-BER-5-2-rtype-leonard.verschuere.git"

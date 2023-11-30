@@ -2,4 +2,5 @@
 doxygen/1.9.1
 
 [generators]
-cmake
+CMakeDeps
+CMakeToolchain

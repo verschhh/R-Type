@@ -34,6 +34,5 @@ int test(int a, int b) {
  */
 
 int main(int ac, char **av) {
-    int result = test(2, 4);
-    return result;
+    ecs()
 }

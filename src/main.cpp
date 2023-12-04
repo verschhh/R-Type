@@ -6,7 +6,7 @@
 */
 
 #include <iostream>
-#include "ecs.hpp"
+#include "Entity.hpp"
 
 /** @file main.cpp
 */

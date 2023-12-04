@@ -5,6 +5,9 @@
 ** main.cpp
 */
 
+#include <iostream>
+#include "ecs.hpp"
+
 /** @file main.cpp
 */
 
@@ -33,6 +36,20 @@ int test(int a, int b) {
  * @return The result of the test function.
  */
 
+
+int ecs() {
+    Entity myEntity(42);
+    size_t value = static_cast<size_t>(myEntity);
+    size_t implicitValue = myEntity;
+
+    std::cout << "Entity value: " << value << std::endl;
+    std::cout << "Implicitly converted value: " << implicitValue << std::endl;
+
+    return 0;
+}
+
 int main(int ac, char **av) {
-    ecs()
+    std::cout << "Hello";
+    ecs();
+    return test(1, 2);
 }

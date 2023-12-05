@@ -30,3 +30,20 @@
 *.exe
 *.out
 *.app
+*.txt
+*.cmake
+*.sh
+
+# Specific files
+Makefile
+CMakeLists.txt
+rtype_client
+conan*
+CMakePresets.json
+CMakeFiles
+
+# do not ignore the following files
+!README.md
+!LICENSE
+!CONTRIBUTING.md
+!conanfile.txt

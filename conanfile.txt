@@ -1,5 +1,12 @@
 [requires]
 doxygen/1.9.1
+SFML/2.5.1@bincrafters/stable
+
+[options]
+sfml:shared=True
+sfml:graphics=True
+sfml:window=True
+sfml:audio=True
 
 [generators]
 CMakeDeps

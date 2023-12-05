@@ -5,17 +5,29 @@
 ** Server main
 */
 
+
+#ifdef _WIN32
+    // Windows-specific code
+    #include <windows.h>
+#elif __linux__
+    // Linux-specific code
+    #include <unistd.h>
+#endif
+
 #include <iostream>
 
-/**
- * @brief 
- *  This is the main function of the program. It calls the test function with
- * @param argc 
- * @param argv 
- * @return int 
- */
-int main(int argc, char **argv)
-{
-    std::cout << "Hello World" << std::endl;
+int main() {
+    // Common code
+    
+    #ifdef _WIN32
+        // Windows-specific code
+        MessageBox(NULL, "Hello from Windows!", "Platform Message", MB_OK);
+    #elif __linux__
+        // Linux-specific code
+        write(STDOUT_FILENO, "Hello from Linux!\n", 18);
+    #endif
+
+    // Common code
+
     return 0;
 }

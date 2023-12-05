@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Entity.hpp"
+#include "Sparse.hpp"
 
 /** @file main.cpp
 */
@@ -48,8 +49,22 @@ int ecs() {
     return 0;
 }
 
-int main(int ac, char **av) {
-    std::cout << "Hello";
-    ecs();
-    return test(1, 2);
+int main() {
+    // Test default constructor
+    Sparse_array<int> sparseArray;
+
+    sparseArray[1] = 42;
+    sparseArray[3] = 10;
+
+    // Sparse_array<int> copiedArray(sparseArray);
+
+    // for (const auto& value : copiedArray) {
+    //     if (value.has_value()) {
+    //         std::cout << value.value() << " ";
+    //     } else {
+    //         std::cout << "N/A ";
+    //     }
+    // }
+    // std::cout << std::endl;
+    return 0;
 }

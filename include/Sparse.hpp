@@ -209,9 +209,16 @@ class Sparse_array {
         }
 
         template <class... Params>
-        reference_type emplace_at(size_type pos, Params&&...)
+        reference_type emplace_at(size_type pos, Params&&... params)
         {
-
+            if (pos > _data.size()) {
+                _data.resize(pos + 1);
+            }
+            std::allocator_traits<decltype(_data.get_allocator())>::destroy(
+            _data.get_allocator(), std::addressof(_data[pos]));
+            std::allocator_traits<decltype(_data.get_allocator())>::construct(
+                _data.get_allocator(), std::addressof(_data[pos]), std::forward<Params>(params)...);
+            return _data[pos];
         }
 
         /**
@@ -223,7 +230,16 @@ class Sparse_array {
         {
             _data[pos] = std::nullopt
         }
-        // size_type get_index(const value_type&) const;
+
+        size_type get_index(const value_type& value) const
+        {
+            for (size_type i = 0; i < _data.size(); ++i) {
+                if (_data[i] == value) {
+                    return i;
+                }
+            }
+            return std::numeric_limits<size_type>::max();
+        }
 
     private:
         container_t _data;

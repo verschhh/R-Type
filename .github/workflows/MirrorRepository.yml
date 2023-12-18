@@ -15,4 +15,4 @@ jobs:
         with:
           target_repo_url: 
             https://github.com/verschhh/R-TypeTest.git
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_private_key: ${{ secrets.TOKEN }}

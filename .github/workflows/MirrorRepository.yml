@@ -14,4 +14,4 @@ jobs:
         with:
           REMOTE: 'git@github.com:verschhh/R-TypeTest.git'
           GIT_SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          GIT_SSH_NO_VERIFY_HOST: "true" 
+          GIT_SSH_NO_VERIFY_HOST: "true"

@@ -14,5 +14,5 @@ jobs:
         uses: pixta-dev/repository-mirroring-action@v1.1.1
         with:
           target_repo_url: 
-            https://github.com/EpitechPromo2026/B-CPP-500-BER-5-2-rtype-leonard.verschuere.git
+            https://github.com/verschhh/R-TypeTest.git
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}

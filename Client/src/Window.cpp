@@ -50,3 +50,7 @@ void Window::ChangeTitle(std::string newTitle) {
 std::vector<int> Window::GetMouseposition() {
     return (std::vector<int>(_mouseX, _mouseY));
 }
+
+void Window::Update(int delta_t) {
+    //to-do: Will display and update all the window elements.
+}

@@ -11,15 +11,10 @@
     #include <string>
     #include <SFML/Window.hpp>
 
-    #define DEFAULT_WIDTH 1300
-    #define DEFAULT_HEIGHT 700
-    #define DEFAULT_TITLE "R-Type"
-    #define DEFAULT_POSWINDOWX 200
-    #define DEFAULT_POSWINDOWY 200
-    #define DEFAULT_FONT "../ressources/Aurabesh.ttf"
+    #include "Loopable.hpp"
+    #include "Constants.hpp"
 
-
-class Window {
+class Window : public Loopable {
     public:
         //Constructors
         Window();
@@ -37,8 +32,7 @@ class Window {
         std::vector<int> GetMouseposition();
 
         //Display
-
-        //Window Loop
+        void Update(int delta_t);
 
     private:
         int _width;

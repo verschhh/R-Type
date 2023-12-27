@@ -36,12 +36,14 @@
 
 # Specific files
 Makefile
-CMakeLists.txt
 rtype_client
 conan*
 CMakePresets.json
 CMakeFiles
 
+*.cmake
+R-Type
+R-TypeServer
 
 # do not ignore the following files
 !README.md
@@ -49,3 +51,4 @@ CMakeFiles
 !CONTRIBUTING.md
 !conanfile.txt
 !build.sh
+!CMakeLists.txt

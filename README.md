@@ -25,12 +25,14 @@ Make sure you have [Conan](https://conan.io/) installed
 Just run the following command at the root of your project and answer questions:
 
 ```sh
-./setup.sh
+conan install . --build=missing
 ```
+
+And then run the different part of the project.
 
 ## Code Contributors
 
-This project exists thanks to all the people who contribute. 
+This project exists thanks to @Dimerci, @luciolle24, @verschhh and the teacher staff of Epitech
 
 ## 🤝 Contributing
 Contributions, issues and feature requests are welcome.<br />

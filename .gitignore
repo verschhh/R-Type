@@ -31,9 +31,21 @@
 *.out
 *.app
 
+# Specific files
+Makefile
+CMakeLists.txt
+*.txt
+*.cmake
+R-Type
+R-TypeServer
+
+# do not ignore the following files
+!README.md
+!LICENSE
+!CONTRIBUTING.md
+!conanfile.txt
 
 CMakeFiles
 Makefile
 CMakeCache.txt
 cmake_install.cmake
-R-Type

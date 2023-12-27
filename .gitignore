@@ -30,11 +30,17 @@
 *.exe
 *.out
 *.app
+*.txt
+*.cmake
+*.sh
 
 # Specific files
 Makefile
-CMakeLists.txt
-*.txt
+rtype_client
+conan*
+CMakePresets.json
+CMakeFiles
+
 *.cmake
 R-Type
 R-TypeServer
@@ -44,8 +50,5 @@ R-TypeServer
 !LICENSE
 !CONTRIBUTING.md
 !conanfile.txt
-
-CMakeFiles
-Makefile
-CMakeCache.txt
-cmake_install.cmake
+!build.sh
+!CMakeLists.txt

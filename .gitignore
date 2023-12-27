@@ -44,3 +44,8 @@ R-TypeServer
 !LICENSE
 !CONTRIBUTING.md
 !conanfile.txt
+
+CMakeFiles
+Makefile
+CMakeCache.txt
+cmake_install.cmake

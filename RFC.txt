@@ -1,0 +1,57 @@
+Network Protocol RFC Documentation
+
+This document outlines a network protocol designed for communication among elements of a networked game engine. The protocol opts for UDP (User Datagram Protocol) to ensure efficient and low-latency communication. It is crafted for educational purposes as part of a school project.
+
+Table of Contents
+    1. Introduction
+    2. Protocol Overview
+       2.1. Components
+       2.2. Message Exchange
+    3. Message Structure
+    4. Transmitter Behavior
+    5. Receiver Behavior
+    6. Error Management
+    7. Security Considerations
+    8. Conclusion
+    9. References
+
+1. Introduction
+    The goal of the R-Type project is to create an online multiplayer copy of the classic R-Type game (1987).
+    The project is intended for educational purposes and utilizes UDP for communication.
+
+2. Protocol Overview
+    2.1. Components
+        The protocol comprises two primary components:
+        - Transmitter: Responsible for dispatching messages to a designated IP address and UDP port.
+        - Receiver: Listens for incoming messages on a specified UDP port and processes them asynchronously.
+
+    2.2. Message Exchange
+        Communication between the transmitter and receiver occurs through UDP datagrams. The transmitter dispatches messages to a specific IP address and UDP port, while the receiver awaits incoming messages on the assigned UDP port.
+
+3. Message Structure
+    Messages exchanged between the transmitter and receiver adhere to a straightforward format:
+    - Payload: The message content, typically a string must adhere to the following format:
+        - Message Length: The message length is a numeric value indicating the length of the message payload. It is represented by a single character.
+        - Message Type: The message type is a numeric value indicating the type of message. It is represented by a single character.
+        - Message Content: The message content is a string of characters. It is represented by a sequence of characters.
+    Every part of the message is separated by a single space character.
+    Every message is terminated by a single newline character.
+
+4. Transmitter Behavior
+    The transmitter class features a `send` method facilitating message transmission. It initializes a UDP socket, dispatches the message payload to the specified IP address and UDP port, and subsequently closes the socket.
+
+5. Receiver Behavior
+    The receiver class establishes a UDP socket, binds it to a designated UDP port, and enters a loop to listen for incoming messages. Upon receiving a message, it processes it asynchronously.
+
+6. Error Management
+    Both the transmitter and receiver incorporate basic error management. If an error is encountered on the transmitter side, the error is logged and the program terminates. If an error is encountered on the receiver side, the error is logged and the receiver continues listening for incoming messages
+
+7. Security Considerations
+    This project lacks security features and is exclusively intended for educational purposes. It should not be utilized in production environments without implementing appropriate security measures.
+
+8. Conclusion
+    This document outlines a network protocol designed for communication among elements of a networked game engine. The protocol opts for UDP (User Datagram Protocol) to ensure efficient and low-latency communication. It is crafted for educational purposes as part of a school project.
+
+9. References
+    - Boost.Asio Documentation : https://www.boost.org/doc/libs/1_77_0/doc/html/boost_asio.html - Reference documentation for the Boost.Asio library.
+    - Sfml Documentation : https://www.sfml-dev.org/learn.php

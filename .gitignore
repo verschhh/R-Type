@@ -48,3 +48,4 @@ CMakeFiles
 !LICENSE
 !CONTRIBUTING.md
 !conanfile.txt
+!build.sh

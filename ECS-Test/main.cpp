@@ -5,6 +5,7 @@
 ** main.cpp
 */
 
+/*
 #include <iostream>
 #include "Entity.hpp"
 #include "Sparse.hpp"
@@ -13,7 +14,7 @@
 */
 
 
-
+/*
 int ecs() {
     Entity myEntity(42);
     size_t value = static_cast<size_t>(myEntity);
@@ -23,9 +24,9 @@ int ecs() {
     std::cout << "Implicitly converted value: " << implicitValue << std::endl;
 
     return 0;
-}
+}*/
 
-int main() {
+/*int main() {
     // Test default constructor
     Sparse_array<int> sparseArray;
 
@@ -43,4 +44,4 @@ int main() {
     // }
     // std::cout << std::endl;
     return 0;
-}
+}*/

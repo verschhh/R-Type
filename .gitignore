@@ -40,9 +40,10 @@ rtype_client
 conan*
 CMakePresets.json
 CMakeFiles
+.vscode
 
 *.cmake
-R-Type
+R-TypeClient
 R-TypeServer
 
 # do not ignore the following files

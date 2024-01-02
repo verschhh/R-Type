@@ -52,4 +52,5 @@ R-TypeServer
 !CONTRIBUTING.md
 !conanfile.txt
 !build.sh
+!clean.sh
 !CMakeLists.txt

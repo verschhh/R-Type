@@ -6,8 +6,7 @@
 */
 
 #include <iostream>
-#include "../include/UdpServer.hpp"
-#include "UdpServer.cpp"
+#include "../include/InitServer.hpp"
 
 int InitServer(int port) {
 /**

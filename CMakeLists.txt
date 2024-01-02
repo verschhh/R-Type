@@ -10,5 +10,5 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add the executable target
-add_executable(R-TypeServer ./Server/src/main.cpp ./Server/src/UdpServer.cpp ./Server/include/UdpServer.hpp)
+add_executable(R-TypeServer ./Server/src/main.cpp ./Server/src/InitServer.cpp ./Server/include/InitServer.hpp ./Server/src/UdpServer.cpp ./Server/include/UdpServer.hpp)
 add_executable(R-TypeClient ./Client/src/RTypeClientTest.cpp)

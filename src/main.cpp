@@ -6,8 +6,8 @@
 */
 
 #include <iostream>
-#include "Entity.hpp"
-#include "Sparse.hpp"
+#include "Registry.hpp"
+#include "Components.hpp"
 
 /** @file main.cpp
 */
@@ -49,22 +49,56 @@ int ecs() {
     return 0;
 }
 
+#include <optional>
+
+void test(Registry registry)
+{
+    registry.register_component<Position>();
+    Entity myEntity = registry.spawn_entity();
+    Position initialPosition = {1.1f, 2.2f};
+
+    registry.add_component(myEntity, std::move(initialPosition));
+
+    auto &positionArray = registry.get_components<Position>();
+
+    Position myEntityPosition = positionArray[myEntity].value();
+    std::cout << "Updated position for entity " << static_cast<std::size_t>(myEntity)
+              << ": x = " << myEntityPosition.x << ", y = " << myEntityPosition.y << std::endl;
+
+    myEntityPosition.x += 20;
+
+    registry.add_component(myEntity, std::move(myEntityPosition));
+    auto &secondArray = registry.get_components<Position>();
+    Position mySecondPosition = secondArray[myEntity].value();
+    std::cout << "Updated position for entity " << static_cast<std::size_t>(myEntity)
+              << ": x = " << mySecondPosition.x << ", y = " << mySecondPosition.y << std::endl;
+
+
+}
+
 int main() {
-    // Test default constructor
-    Sparse_array<int> sparseArray;
+    Registry registry;
 
-    sparseArray[1] = 42;
-    sparseArray[3] = 10;
+    test(registry);
 
-    // Sparse_array<int> copiedArray(sparseArray);
 
-    // for (const auto& value : copiedArray) {
-    //     if (value.has_value()) {
-    //         std::cout << value.value() << " ";
-    //     } else {
-    //         std::cout << "N/A ";
-    //     }
+    // Entity myEntity = registry.spawn_entity();
+    // Position initialPosition = {0.0f, 0.0f};
+    // registry.add_component(myEntity, std::move(initialPosition));
+
+    // std::optional<Position>& maybePosition = positionArray[myEntity];
+
+    // if (maybePosition) {
+    //     Position& myEntityPosition = *maybePosition;
+
+    //     myEntityPosition.x = 10.0f;
+    //     myEntityPosition.y = 5.0f;
+
+    //     std::cout << "Updated position for entity " << static_cast<std::size_t>(myEntity)
+    //           << ": x = " << myEntityPosition.x << ", y = " << myEntityPosition.y << std::endl;
+    // } else {
+    //     std::cerr << "Position component does not exist for entity " << static_cast<std::size_t>(myEntity) << std::endl;
     // }
-    // std::cout << std::endl;
+
     return 0;
 }

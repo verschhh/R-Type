@@ -1,4 +1,4 @@
-#include "Window.hpp"
+#include "../include/Window.hpp"
 
 Window::Window() {
     Window(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_POSWINDOWX, DEFAULT_POSWINDOWY,DEFAULT_TITLE, DEFAULT_FONT);

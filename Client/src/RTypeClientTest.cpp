@@ -1,77 +1,67 @@
-#include<iostream>
-#include<arpa/inet.h>
-#include<unistd.h>
-#include<sys/socket.h>
-#include<sys/types.h>
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-using namespace std;
+#include <iostream>
+#include <boost/asio.hpp>
+#include <boost/bind.hpp>
+#include <boost/array.hpp>
+#include <random>
 
-class udpSocket
-{
+using boost::asio::ip::udp;
+
+class udpSocket {
 public:
-    udpSocket( char * inServer, int inPort) : port(inPort), sByte(0), rByte(0) {
-        memset(bufferSend, '\0', sizeof(bufferSend)+1);
-        memset(bufferRecv, '\0', sizeof(bufferRecv)+1);
-        memset(server, '\0', sizeof(server)+1);
-        memcpy(server, inServer, strlen(inServer));
+    udpSocket(boost::asio::io_service& io_service, const std::string& sender_port)
+        : socket_(io_service, udp::endpoint(udp::v4(), 0)) {
+        udp::resolver resolver(io_service);
+        udp::resolver::query query(udp::v4(), "127.0.0.1", sender_port);
+        udp::resolver::iterator iter = resolver.resolve(query);
+        endpoint_ = *iter;
+
+        // Generate a random listener port between 10000 and 99999
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distr(10000, 99999);
+        listener_port_ = distr(gen);
+
+        // Send the listener port and a "Hello Server" message to the sender port
+        std::string msg = std::to_string(listener_port_) + " Hello Server";
+        send(msg);
     }
 
-    ssize_t sendRecv( char * inMsg) {
-        int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-        struct sockaddr_in servAddr;
-        struct sockaddr_in  cliAddr;
-        socklen_t cLen = sizeof(cliAddr);
-        socklen_t sLen = sizeof(servAddr);
-
-        servAddr.sin_family = AF_INET;
-        servAddr.sin_port = htons(port);
-        servAddr.sin_addr.s_addr = inet_addr(server);
-        memcpy(bufferSend, inMsg, strlen(inMsg));
-        sByte = sendto(sockfd,bufferSend,sizeof(bufferSend),0,(struct sockaddr * )&servAddr,sLen);
-        std::cout << "[" << sByte << "] Bytes Sent : " << std::endl;
-        rByte = recvfrom(sockfd,bufferRecv,sizeof(bufferRecv),0,(struct sockaddr *)&cliAddr,&cLen);
-        close(sockfd);
-        return sByte;
+    void send(const std::string& msg) {
+        socket_.send_to(boost::asio::buffer(msg, msg.size()), endpoint_);
     }
 
-    void  printMsg() {
-        std::cout << "[" << rByte << "] Bytes Rcvd : " << bufferRecv << std::endl;
+    void receive() {
+        socket_.async_receive_from(
+            boost::asio::buffer(recv_buffer_), remote_endpoint_,
+            boost::bind(&udpSocket::handle_receive, this,
+            boost::asio::placeholders::error,
+            boost::asio::placeholders::bytes_transferred));
     }
 
-    char* getRecvMsg() {
-        return bufferRecv;
-    }
-
-    ssize_t getRecvBytes() {
-        return rByte;
-    }
-
-    ~udpSocket() {
+    void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred) {
+        if (!error) {
+            std::cout << "Received: " << std::string(recv_buffer_.begin(), recv_buffer_.begin() + bytes_transferred) << std::endl;
+        }
     }
 
 private:
-    int     port;
-    ssize_t sByte;
-    ssize_t rByte;
-    char    server[100];
-    char bufferSend[256];
-    char bufferRecv[256];
+    udp::socket socket_;
+    udp::endpoint endpoint_;
+    udp::endpoint remote_endpoint_;
+    boost::array<char, 256> recv_buffer_;
+    int listener_port_;
 };
 
-int main(int argc, char* argv[])
-{
-    if ( argc != 4 ) {
-        std::cout << "Usage:udp_client [server] [port] [Message]" << std::endl;
-        exit(-1);
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: udp_client <sender_port>\n";
+        return 1;
     }
 
-    udpSocket mUDP(argv[1], std::stoi(argv[2]));
-    if ( mUDP.sendRecv(argv[3]) > 0 ) {
-        // mUDP.printMsg();
-        std::cout << "[" << mUDP.getRecvBytes() << "] " << mUDP.getRecvMsg() << std::endl;
-    }
+    boost::asio::io_service io_service;
+    udpSocket s(io_service, argv[1]);
+    s.receive();
+    io_service.run();
 
-    exit(0);
+    return 0;
 }

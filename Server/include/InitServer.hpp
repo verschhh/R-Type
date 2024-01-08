@@ -11,6 +11,6 @@
 #include "../include/UdpServer.hpp"
 
 
-int InitServer(int port);
+int InitServer();
 
 #endif /* !INITSERVER_HPP_ */

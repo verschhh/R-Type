@@ -8,15 +8,14 @@
 #include <iostream>
 #include "../include/InitServer.hpp"
 
-int InitServer(int port) {
+int InitServer() {
 /**
  * @brief the function that initialize the server side of the project
- * @param port the port on which the server will listen
  * @return 0 if the server is correctly launched, -1 otherwise
  */
     try {
         boost::asio::io_service io_service;
-        UdpServer server(io_service, port);
+        UdpServer server(io_service);
         io_service.run();
     }
     catch (std::exception& e) {

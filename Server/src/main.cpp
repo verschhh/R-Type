@@ -15,15 +15,6 @@ int main(int argc, char* argv[]) {
     * @param argv the arguments
     * @return 0 if the server is correctly launched, -1 otherwise
     */
-    if ( argc != 2 ) {
-      std::cout << "usage: " << argv[0] << " <port>" << std::endl;
-      return -1;
-    }
-    int port = std::stoi(argv[1]);
-    if (port <= 0 || port > 9999) {
-      std::cout << "usage: " << argv[0] << " <port>" << std::endl;
-      return -1;
-    }
-    InitServer(port);
+    InitServer();
     return 0;
 }

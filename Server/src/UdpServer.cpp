@@ -41,9 +41,19 @@ void UdpServer::UdpSendBack() {
     myStr += data_;
     socket_.async_send_to(boost::asio::buffer(myStr.c_str(), myStr.length()), sender_endpoint_,
     [this] (boost::system::error_code ec, std::size_t recvd_bytes) {
-        UdpReceive();
+        if (!ec) {
+            std::string okMessage = "pute";
+            std::cout << okMessage << std::endl;
+            std::cout << sender_endpoint_ << std::endl;
+            socket_.async_send_to(boost::asio::buffer(okMessage.c_str(), okMessage.length()), sender_endpoint_,
+            [this] (boost::system::error_code ec, std::size_t recvd_bytes) {
+                UdpReceive();
+            });
+        } else {
+            UdpReceive();
+        }
     });
-  }
+}
 
 boost::asio::ip::udp::endpoint UdpServer::getSenderEndpoint() const {
     /**

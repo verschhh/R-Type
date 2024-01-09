@@ -30,10 +30,27 @@
 *.exe
 *.out
 *.app
+*.txt
+*.cmake
+*.sh
 
-
-CMakeFiles
+# Specific files
 Makefile
-CMakeCache.txt
-cmake_install.cmake
-R-Type
+rtype_client
+conan*
+CMakePresets.json
+CMakeFiles
+.vscode
+
+*.cmake
+R-TypeClient
+R-TypeServer
+
+# do not ignore the following files
+!README.md
+!LICENSE
+!CONTRIBUTING.md
+!conanfile.txt
+!build.sh
+!clean.sh
+!CMakeLists.txt

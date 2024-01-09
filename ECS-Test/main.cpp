@@ -5,6 +5,7 @@
 ** main.cpp
 */
 
+/*
 #include <iostream>
 #include "Registry.hpp"
 #include "Components.hpp"

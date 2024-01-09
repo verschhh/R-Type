@@ -61,7 +61,15 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
+        "csignal": "cpp",
+        "bitset": "cpp",
+        "codecvt": "cpp",
         "complex": "cpp",
+        "coroutine": "cpp",
+        "list": "cpp",
+        "source_location": "cpp",
+        "future": "cpp",
+        "iomanip": "cpp",
         "typeindex": "cpp"
     }
 }

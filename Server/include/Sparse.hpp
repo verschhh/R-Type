@@ -185,11 +185,14 @@ class Sparse_array {
          */
         reference_type insert_at(size_type pos, const Component &value)
         {
-            if (pos > _data.size()) {
-                _data.resize(pos + 1, Component{});
+            if (pos > _data.size())
+                throw std::invalid_argument("Invalid position in sparse array");
+            if (pos < _data.size()) {
+                _data[pos] = std::move(value);
+                return _data[pos];
             }
-            _data[pos] = value;
-            return _data[pos];
+            _data.push_back(std::move(value));
+            return _data.back();
         }
 
         /**
@@ -239,6 +242,12 @@ class Sparse_array {
                 }
             }
             throw std::invalid_argument("Index out of range");
+        }
+
+        void extend(size_t sizeToExtend)
+        {
+            for (size_t x = 0; x < sizeToExtend; x += 1)
+                _data.push_back(std::nullopt);
         }
 
     private:

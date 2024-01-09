@@ -2,51 +2,31 @@
 ** EPITECH PROJECT, 2023
 ** R-Type
 ** File description:
-** Custom R-Type Implementation
+** Window.hpp
 */
 
-#ifndef WINDOW
-    #define WINDOW
+#ifndef _WINDOW_HPP_
+    #define _WINDOW_HPP_
 
-    #include <string>
-    #include <SFML/Window.hpp>
+    #include <SFML/Graphics.hpp>
 
-    #include "Loopable.hpp"
-    #include "Constants.hpp"
-
-class Window : public Loopable {
+class SfmlWindow {
     public:
-        //Constructors
-        Window();
-        Window(int width, int height, int posWindowX, int posWindowY, std::string title, std::string fontPath);
-        Window(std::string fontPath, bool isFullScreen);
 
-        //Destructors
-        ~Window();
+    SfmlWindow(int width, int height, const std::string& title) : window(sf::VideoMode(width, height), title) {}
 
-        // Window Configuration
-        void ToggleFullscreen();
-        void ResizeWindow(int newWidth, int newHeight);
-        void ChangeFont(std::string newFontPath);
-        void ChangeTitle(std::string newTitle);
-        std::vector<int> GetMouseposition();
+    bool isOpen() { return window.isOpen(); };
+    bool pollEvent(sf::Event& event) { return window.pollEvent(event); };
+    void close() { window.close(); };
+    void clear() { window.clear(); };
+    void display() { window.display(); };
+    void draw(sf::Sprite sprite) { window.draw(sprite); };
+    bool isClosedEvent(sf::Event& event) const { return event.type == sf::Event::Closed; };
 
-        //Display
-        void Update(int delta_t);
+    sf::Event event;
 
-    private:
-        int _width;
-        int _height;
-        int _mouseX;
-        int _mouseY;
-        int _posWindowX;
-        int _posWindowY;
-
-        bool _isFullScreen;
-
-        std::string _title;
-        std::string _backgroundPath;
-        std::string _fontPath;
+    protected:
+    sf::RenderWindow window;
 };
 
-#endif /* !Window */
+#endif

@@ -1,77 +1,25 @@
-#include<iostream>
-#include<arpa/inet.h>
-#include<unistd.h>
-#include<sys/socket.h>
-#include<sys/types.h>
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-using namespace std;
+#include <iostream>
+#include <thread>
+#include <chrono>
+#include "../../Engine/Network/NLib.hpp"
 
-class udpSocket
-{
-public:
-    udpSocket( char * inServer, int inPort) : port(inPort), sByte(0), rByte(0) {
-        memset(bufferSend, '\0', sizeof(bufferSend)+1);
-        memset(bufferRecv, '\0', sizeof(bufferRecv)+1);
-        memset(server, '\0', sizeof(server)+1);
-        memcpy(server, inServer, strlen(inServer));
-    }
+void TestClient() {
+    // Create a client sender
+    UDPBoostNetwork::UDPSender clientSender(17003, "192.168.178.26");
 
-    ssize_t sendRecv( char * inMsg) {
-        int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-        struct sockaddr_in servAddr;
-        struct sockaddr_in  cliAddr;
-        socklen_t cLen = sizeof(cliAddr);
-        socklen_t sLen = sizeof(servAddr);
+    // Send a "new" message to simulate a new connection
+    std::cout << "Sending new connection message..." << std::endl;
+    clientSender.send("new " + clientSender.get_ip() + ":" + std::to_string(clientSender.get_port()));
 
-        servAddr.sin_family = AF_INET;
-        servAddr.sin_port = htons(port);
-        servAddr.sin_addr.s_addr = inet_addr(server);
-        memcpy(bufferSend, inMsg, strlen(inMsg));
-        sByte = sendto(sockfd,bufferSend,sizeof(bufferSend),0,(struct sockaddr * )&servAddr,sLen);
-        std::cout << "[" << sByte << "] Bytes Sent : " << std::endl;
-        rByte = recvfrom(sockfd,bufferRecv,sizeof(bufferRecv),0,(struct sockaddr *)&cliAddr,&cLen);
-        close(sockfd);
-        return sByte;
-    }
+    // Wait for a bit to let the server process the new connection
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
-    void  printMsg() {
-        std::cout << "[" << rByte << "] Bytes Rcvd : " << bufferRecv << std::endl;
-    }
+    // Send a "quit" message to simulate a disconnection
+    std::cout << "Sending disconnection message..." << std::endl;
+    clientSender.send("quit " + clientSender.get_ip() + ":" + std::to_string(clientSender.get_port()));
+}
 
-    char* getRecvMsg() {
-        return bufferRecv;
-    }
-
-    ssize_t getRecvBytes() {
-        return rByte;
-    }
-
-    ~udpSocket() {
-    }
-
-private:
-    int     port;
-    ssize_t sByte;
-    ssize_t rByte;
-    char    server[100];
-    char bufferSend[256];
-    char bufferRecv[256];
-};
-
-int main(int argc, char* argv[])
-{
-    if ( argc != 4 ) {
-        std::cout << "Usage:udp_client [server] [port] [Message]" << std::endl;
-        exit(-1);
-    }
-
-    udpSocket mUDP(argv[1], std::stoi(argv[2]));
-    if ( mUDP.sendRecv(argv[3]) > 0 ) {
-        // mUDP.printMsg();
-        std::cout << "[" << mUDP.getRecvBytes() << "] " << mUDP.getRecvMsg() << std::endl;
-    }
-
-    exit(0);
+int main() {
+    TestClient();
+    return 0;
 }

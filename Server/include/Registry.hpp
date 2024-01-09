@@ -9,9 +9,13 @@
     #define REGISTRY_HPP_
 
     #include <map>
+    #include <unordered_map>
     #include <any>
     #include <typeindex>
     #include <functional>
+    #include <string>
+    #include <iostream>
+    #include <complex>
 
     #include "Sparse.hpp"
     #include "Entity.hpp"
@@ -23,32 +27,38 @@ class Registry
         virtual ~Registry() = default;
 
 
-    template <class Component>
-    Sparse_array<Component> &register_component()
-    {
+        template <class Component>
+        Sparse_array<Component> &register_component()
+        {
+            auto& componentArray = _componentsArrays[typeid(Component)];
 
-        auto [it, ok] = _componentsArrays.try_emplace(std::type_index(typeid(Component)), std::make_any<Sparse_array<Component>>(_nbEntities));
-
-        if (ok) {
-            _erasers.emplace_back([](Registry &registry, Entity const &entity) {
-                registry.remove_component<Component>(entity);
-                });
-            } else {
-                throw std::invalid_argument("Already exist");
+            if (componentArray.has_value() == false) {
+                componentArray = Sparse_array<Component>();
             }
-            return std::any_cast<Sparse_array<Component> &>(it->second);
+
+            return std::any_cast<Sparse_array<Component>&>(componentArray);
         };
 
         template <class Component>
         Sparse_array<Component> &get_components()
         {
-            return std::any_cast<Sparse_array<Component> &>(_componentsArrays.at(std::type_index(typeid(Component))));
-        };
+            auto it = _componentsArrays.find(std::type_index(typeid(Component)));
+
+            if (it == _componentsArrays.end()) {
+                throw std::out_of_range("Component not registered in the registry");
+            }
+            return std::any_cast<Sparse_array<Component> &>(it->second);
+        }
 
         template <class Component>
         Sparse_array<Component> const &get_components() const
         {
-            return std::any_cast<Sparse_array<Component> &>(_componentsArrays.at(std::type_index(typeid(Component))));
+            auto it = _componentsArrays.find(std::type_index(typeid(Component)));
+
+            if (it == _componentsArrays.end()) {
+                throw std::out_of_range("Component not registered in the registry");
+            }
+            return std::any_cast<Sparse_array<Component> &>(it->second);
         };
 
         Entity spawn_entity()
@@ -71,27 +81,31 @@ class Registry
             for (auto &&it : _erasers)
                 it(*this, e);
         };
-        
+
         template <typename Component>
         typename Sparse_array<Component>::reference_type add_component(Entity const &e, Component &&c)
         {
             if (_componentsArrays.find(std::type_index(typeid(Component))) == _componentsArrays.end())
-                throw std::invalid_argument("Component doesn't exist");
-            Sparse_array<Component> &sparseArray = std::any_cast<Sparse_array<Component> &>(_componentsArrays.at(std::type_index(typeid(Component))));
+                throw std::invalid_argument("Component already exists");
+            try {
+                Sparse_array<Component> &sparseArray = std::any_cast<Sparse_array<Component> &>(_componentsArrays.at(std::type_index(typeid(Component))));
 
-            if (e > sparseArray.size()) {
-                sparseArray.extend((size_t) e - sparseArray.size());
+                if (e > sparseArray.size()) {
+                    sparseArray.extend((size_t) e - sparseArray.size());
+                }
+                return sparseArray.insert_at(e, c);
+            } catch (const std::bad_any_cast &e) {
+                throw std::invalid_argument("Error");
             }
-            return sparseArray.insert_at(e, c);
         };
-        
+
         template <typename Component, typename ...Params>
         typename Sparse_array<Component>::reference_type emplace_component(Entity const &to, Params &&...p)
         {
             Sparse_array<Component> sparseArray = std::any_cast<Sparse_array<Component> &>(_componentsArrays.at(std::type_index(typeid(Component))));
             return sparseArray.emplaceAt(to, p...);
         };
-        
+
         template <typename Component>
         void remove_component(Entity const &from)
         {
@@ -101,11 +115,16 @@ class Registry
                 sparseArray.erase(from);
             }
         };
-    
+
     private:
-        std::map<std::type_index, std::any> _componentsArrays;
+        std::unordered_map<std::type_index, std::any> _componentsArrays;
         std::size_t _nbEntities = 0;
         std::vector<std::function<void (Registry &, Entity const &)>> _erasers;
+
+        template <class Component>
+        bool is_registered() const {
+            return _componentsArrays.find(typeid(Component)) != _componentsArrays.end();
+        }
 };
 
 #endif

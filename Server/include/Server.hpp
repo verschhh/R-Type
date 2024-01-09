@@ -18,7 +18,7 @@ using boost::asio::ip::udp;
 
 class Server {
     public:
-        Server(int port, std::string ip) : server_receive(port, ip) {}
+        Server(int port, std::string ip) : sReceiver(port, ip) {}
         ~Server() = default;
         int run();
         std::string GetLocalAddress();
@@ -27,8 +27,8 @@ class Server {
         void CheckNewDeconnections(std::string data);
         std::vector<std::string> Split(const std::string& str, const std::string& delim);
     private:
-        UDPBoostNetwork::UDPReceiver server_receive;
-        std::vector<UDPBoostNetwork::UDPSender> clients_send;
+        UDPBoostNetwork::UDPReceiver sReceiver;
+        std::vector<UDPBoostNetwork::UDPSender> sSender;
 };
 
 #endif /* !SERVER_HPP_ */

@@ -1,4 +1,4 @@
 mkdir -p build && cd build
 cmake ..
-make && mv R-TypeServer .. && mv R-TypeClient .. 
+make && mv R-TypeCommon ..
 cd .. && rm -rf build

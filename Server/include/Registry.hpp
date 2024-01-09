@@ -16,13 +16,13 @@
     #include "Sparse.hpp"
     #include "Entity.hpp"
 
-class Registry 
+class Registry
 {
     public:
         explicit Registry() = default;
         virtual ~Registry() = default;
-    
-    
+
+
     template <class Component>
     Sparse_array<Component> &register_component()
     {
@@ -38,26 +38,26 @@ class Registry
             }
             return std::any_cast<Sparse_array<Component> &>(it->second);
         };
-        
+
         template <class Component>
         Sparse_array<Component> &get_components()
         {
             return std::any_cast<Sparse_array<Component> &>(_componentsArrays.at(std::type_index(typeid(Component))));
         };
-        
+
         template <class Component>
         Sparse_array<Component> const &get_components() const
         {
             return std::any_cast<Sparse_array<Component> &>(_componentsArrays.at(std::type_index(typeid(Component))));
         };
-        
+
         Entity spawn_entity()
         {
             _nbEntities += 1;
 
             return Entity(_nbEntities - 1);
         };
-        
+
          Entity entity_from_index(std::size_t idx) const
         {
             if (idx >= _nbEntities) {
@@ -65,7 +65,7 @@ class Registry
             }
             return Entity(idx);
         };
-        
+
         void kill_entity(Entity const &e)
         {
             for (auto &&it : _erasers)

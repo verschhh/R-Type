@@ -1,0 +1,42 @@
+enemy {
+    Kentin {
+        name= 'Kentin',
+        health= 100,
+        movement= 10 5,
+        delay= 1.0,
+        weapon= laser-gun {
+            damage= 10,
+            cooldown= 0.5,
+        },
+    }
+    Ben {
+        name= 'Ben',
+        health= 60,
+        movement= 7 3,
+        delay= 0.5,
+        weapon= light-gun {
+            damage= 3,
+            cooldown= 0.2,
+        },
+    }
+    Felix {
+        name= 'Felix',
+        health= 90,
+        movement= 8 4,
+        delay= 1.0,
+        weapon= noodle-gun {
+            damage= 15,
+            cooldown= 0.7,
+        },
+    }
+    Paul {
+        name= 'Paul',
+        health= 80,
+        movement= 10 7,
+        delay= 1.0,
+        weapon= death-gun {
+            damage= 100,
+            cooldown= 5,
+        },
+    }
+}

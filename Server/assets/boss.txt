@@ -1,0 +1,11 @@
+
+enemy {
+    name= 'Boutin',
+    health= 1000,
+    movement= +0, +5,
+    delay= 1.0,
+    weapon= y-gun {
+        damage= 25,
+        cooldown= 2,
+    }
+}

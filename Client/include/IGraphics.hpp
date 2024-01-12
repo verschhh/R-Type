@@ -9,8 +9,13 @@
     #define _WINDOW_HPP_
 
     #include <SFML/Graphics.hpp>
+    #include <map>
+    #include "Sprite.hpp"
 
 class SfmlWindow {
+
+    public:
+
     public:
 
     SfmlWindow(int width, int height, const std::string& title) : window(sf::VideoMode(width, height), title) {}
@@ -21,6 +26,7 @@ class SfmlWindow {
     void clear() { window.clear(); };
     void display() { window.display(); };
     void draw(sf::Sprite sprite) { window.draw(sprite); };
+    void drawShape(sf::RectangleShape shape) { window.draw(shape); };
     bool isClosedEvent(sf::Event& event) const { return event.type == sf::Event::Closed; };
 
     sf::Event event;

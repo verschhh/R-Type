@@ -15,4 +15,11 @@
         float x, y;
     };
 
+    struct CSprite
+    {
+        float x, y;
+        float scaleX, scaleY;
+        std::string file;
+    };
+
 #endif

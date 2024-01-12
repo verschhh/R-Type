@@ -10,12 +10,12 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 # project(R-Type-Common VERSION 1.0)
 
 # Specify the C++ standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add the executable target
 # add_executable(R-TypeServer ./Server/src/main.cpp ./Server/src/InitServer.cpp ./Server/include/InitServer.hpp ./Server/src/UdpServer.cpp ./Server/include/UdpServer.hpp)
 # add_executable()
-add_executable(R-TypeCommon ./Client/src/main.cpp ./Client/include/Window.hpp ./Client/include/Sound.hpp ./Client/include/Sprite.hpp ./Client/include/Input.hpp)
+add_executable(R-TypeCommon ./Client/src/main.cpp ./Client/src/Input.cpp ./Client/src/Missile.cpp ./Client/include/Sprite.hpp ./Client/include/Components.hpp ./Client/include/Input.hpp ./Client/include/Sound.hpp ./Client/include/IGraphics.hpp ./Client/include/Missile.hpp)
 
 target_link_libraries(R-TypeCommon sfml-graphics sfml-audio)

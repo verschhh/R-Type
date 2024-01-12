@@ -9,12 +9,14 @@
     #define _SPRITE_HPP_
 
     #include <SFML/Graphics.hpp>
-    #include "Window.hpp"
+    #include "Missile.hpp"
 
-class Sprite {
+class SpriteManager {
     public:
 
-    Sprite() = default;
+    public:
+
+    SpriteManager() = default;
 
     bool loadFromFile(std::string file) { return texture.loadFromFile(file); };
     void setTexture() { my_sprite.setTexture(texture); };
@@ -23,11 +25,13 @@ class Sprite {
     sf::Vector2f getPosition() {return my_sprite.getPosition(); };
 
     sf::Sprite my_sprite;
+    std::vector<Missile> missiles;
 
     private:
 
     sf::Texture texture;
 };
+
 
 
 #endif

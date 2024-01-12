@@ -30,9 +30,9 @@ class SfmlWindow {
     bool isClosedEvent(sf::Event& event) const { return event.type == sf::Event::Closed; };
 
     sf::Event event;
+    sf::RenderWindow window;
 
     protected:
-    sf::RenderWindow window;
 };
 
 #endif

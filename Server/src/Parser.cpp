@@ -48,3 +48,4 @@ std::string Parser::extractValue(const std::string& pair) {
     size_t pos = pair.find(':');
     return pair.substr(pos + 1);
 }
+

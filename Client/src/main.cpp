@@ -13,7 +13,9 @@
 #include "../include/Input.hpp"
 #include "../include/Missile.hpp"
 #include "../include/HitBox.hpp"
+#include "../include/Enemy.hpp"
 #include <iostream>
+
 
 void events(SfmlWindow &myWindow) {
     sf::Event event;
@@ -68,7 +70,6 @@ int main() {
     Missile missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(1.0f, 0.0f), 3);
     Registry registry;
 
-
     // create a sprite manager
     SpriteManager sprite;
     SpriteManager sprite2;
@@ -103,8 +104,10 @@ int main() {
 
     load_sprites(sprite, mySprite);
     load_sprites(sprite2, mySprite2);
-
-
+    std::cout << "Enemy" << std::endl;
+    Enemy enemy(registry);
+    std::cout << "Enemy" << std::endl;
+    
     while (myWindow.isOpen()) {
         events(myWindow);
         handleMouvement(&mySprite, my_input, &sprite);
@@ -115,7 +118,8 @@ int main() {
         RickHitBox.update(mySprite.x, mySprite.y);
         FelixHitBox.update(mySprite2.x, mySprite2.y);
         myWindow.draw(sprite.my_sprite);
-        myWindow.draw(sprite2.my_sprite);
+        myWindow.draw(enemy.sprite.my_sprite);
+        //myWindow.draw(sprite2.my_sprite);
         myWindow.drawShape(RickHitBox.shape);
         myWindow.drawShape(FelixHitBox.shape);
         missile.draw(myWindow.window);

@@ -6,6 +6,7 @@
 */
 
 #include "../include/HitBox.hpp"
+#include <iostream>
 
 HitBox::HitBox(float height, float width, float x, float y)
 {
@@ -18,6 +19,7 @@ HitBox::HitBox(float height, float width, float x, float y)
     this->shape.setFillColor(sf::Color::Transparent);
     this->shape.setOutlineThickness(1);
     this->shape.setOutlineColor(sf::Color::Yellow);
+    std::cout << "HitBox created" << std::endl;
 }
 
 void HitBox::update(float x, float y)

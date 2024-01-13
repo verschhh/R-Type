@@ -12,8 +12,10 @@ void Server::CheckNewConnections(std::string data)
 {
     /**
     * @brief The CheckNewConnections method takes a string data as an argument. This string is expected to contain a message from a client. If the first word in the message is "new", the method interprets this as a new connection request. It then prints out the connection details and sends a "new" message to all existing clients. The new client's IP and port are extracted from the data string and used to create a new UDPSender object, which is added to the sSender vector. Finally, the method sends a "new" message to the newly connected client for each existing client, including the IP and port of the existing client.
-    * @param data 
+    * @param data
     */
+
+    std::cout << "NJCOIJNVKBHDEJKCDNBJDLKNJK" << std::endl;
     if (Split(data, " ").front() == "new") {
         std::cout << "New connection: " << data << std::endl;
         std::string newClientPort = Split(data, " ").back();
@@ -59,10 +61,10 @@ std::vector<std::string> Server::Split(const std::string& str, const std::string
 {
 /**
  * @brief Split a string
- * 
- * @param str 
- * @param token 
- * @return std::vector<std::string> 
+ *
+ * @param str
+ * @param token
+ * @return std::vector<std::string>
  */
     std::vector<std::string> tokens;
     size_t prev = 0, pos = 0;
@@ -77,6 +79,11 @@ std::vector<std::string> Server::Split(const std::string& str, const std::string
         prev = pos + delim.length();
     } while (pos < str.length() && prev < str.length());
 
+
+    
+    // for (auto& tokeny : tokens) {
+    //     std::cout << "tokens = " << tokeny << std::endl;
+    // }
     return tokens;
 }
 

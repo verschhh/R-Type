@@ -19,3 +19,13 @@ add_executable(R-TypeClient ./Client/src/RTypeClientTest.cpp)
 #add_executable(R-TypeCommon ./Client/src/main.cpp ./Client/include/Window.hpp ./Client/include/Sound.hpp ./Client/include/Sprite.hpp ./Client/include/Input.hpp)
 
 #target_link_libraries(R-TypeCommon sfml-graphics sfml-audio)
+
+target_link_libraries(R-TypeClient
+    ${Boost_LIBRARIES}
+    pthread
+)
+
+target_link_libraries(R-TypeServer
+    ${Boost_LIBRARIES}
+    pthread
+)

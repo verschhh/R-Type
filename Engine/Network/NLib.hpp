@@ -30,7 +30,7 @@ public:
         void send(std::string message) override {
             /**
              * @brief Send a message with UDP
-             * @param message 
+             * @param message
              */
             boost::asio::io_context io_context;
             boost::asio::ip::udp::socket socket(io_context, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), 0));
@@ -47,7 +47,7 @@ public:
         void send(std::vector<std::string> messages) override {
             /**
              * @brief Send a vector of messages with UDP
-             * @param messages 
+             * @param messages
              */
             for (const auto& message : messages) {
                 send(message);
@@ -83,7 +83,7 @@ public:
         std::string get_ip() override {
         /**
          * @brief Get the ip object
-         * @return std::string 
+         * @return std::string
          */
             return _ip;
         }
@@ -212,7 +212,7 @@ public:
         void ClearReceivedDataAtIndex(int index) override {
             /**
              * @brief Clear the received data object
-             * @param index 
+             * @param index
              */
             received_data.erase(received_data.begin() + index);
         }

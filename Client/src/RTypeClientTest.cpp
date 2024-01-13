@@ -25,7 +25,7 @@ int main() {
         std::string sender_ip = cSender.get_ip();
 
         // Send a "new" message to simulate a new connection
-        cSender.send("new " + sender_ip + ":" + std::to_string(cSender.get_port()));
+        cSender.send("new " + sender_ip + ":" + std::to_string(port));
 
         // cReceiver.receive();
 

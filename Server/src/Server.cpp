@@ -15,7 +15,7 @@ void Server::CheckNewConnections(std::string data)
     * @param data
     */
 
-    std::cout << "NJCOIJNVKBHDEJKCDNBJDLKNJK" << std::endl;
+    std::cout << "data: " << data << std::endl;
     if (Split(data, " ").front() == "new") {
         std::cout << "New connection: " << data << std::endl;
         std::string newClientPort = Split(data, " ").back();

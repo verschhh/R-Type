@@ -7,21 +7,15 @@
 
 #include "../include/Enemy.hpp"
 
-Enemy::Enemy(Registry *registry) : hitboxe(0, 0 , 0 , 0), entitie(registry->spawn_entity()) {
-    std::cout << "registry" << std::endl;
+Enemy::Enemy(Registry *registry) : hitbox(0, 0 , 0 , 0), entity(registry->spawn_entity()) {
     this->registry = registry;
-    std::cout << "spawn entity" << std::endl;
-    // this->entitie = registry->spawn_entity();
-    std::cout << "initialCSprite" << std::endl;
     initialCSprite = {0.0, 0.0, 0.5, 0.5, "./Client/Assets/Image/Felix.png"};
-    std::cout << "add component" << std::endl;
-    registry->add_component(entitie, std::move(initialCSprite));
-    std::cout << "positionArray" << std::endl;
+    registry->add_component(entity, std::move(initialCSprite));
     auto &positionArray = registry->get_components<CSprite>();
-    std::cout << "load cSprite" << std::endl;
-    this->cSprite = positionArray[entitie].value();
-    std::cout << "load sprites" << std::endl;
+    this->cSprite = positionArray[entity].value();
     load_sprites(this->sprite, this->cSprite);
+    rect = sprite.my_sprite.getGlobalBounds();
+    hitbox = HitBox(rect.height, rect.width, cSprite.x, cSprite.y);
 }
 
 int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {
@@ -33,6 +27,16 @@ int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {
     sprite.setPosition(spriteChara.x, spriteChara.y);
     sprite.setTexture();
     return 0;
+}
+
+void Enemy::update(float deltaTime, float x, float y) {
+    hitbox.update(x, y);
+    sprite.setPosition(x, y);
+}
+
+void Enemy::draw(sf::RenderWindow& window) {
+    window.draw(sprite.my_sprite);
+    window.draw(hitbox.shape);
 }
 
 Enemy::~Enemy()

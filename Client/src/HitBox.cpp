@@ -10,7 +10,6 @@
 
 HitBox::HitBox(float height, float width, float x, float y)
 {
-    std::cout << "In" << std::endl;
     this->height = height;
     this->width = width;
     this->x = x;
@@ -20,7 +19,6 @@ HitBox::HitBox(float height, float width, float x, float y)
     this->shape.setFillColor(sf::Color::Transparent);
     this->shape.setOutlineThickness(1);
     this->shape.setOutlineColor(sf::Color::Yellow);
-    std::cout << "HitBox created" << std::endl;
 }
 
 void HitBox::update(float x, float y)

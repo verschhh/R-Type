@@ -104,9 +104,7 @@ int main() {
 
     load_sprites(sprite, mySprite);
     load_sprites(sprite2, mySprite2);
-    std::cout << "Enemy" << std::endl;
     Enemy enemy(&registry);
-    std::cout << "Enemy" << std::endl;
 
     while (myWindow.isOpen()) {
         events(myWindow);
@@ -118,7 +116,7 @@ int main() {
         RickHitBox.update(mySprite.x, mySprite.y);
         FelixHitBox.update(mySprite2.x, mySprite2.y);
         myWindow.draw(sprite.my_sprite);
-        myWindow.draw(enemy.sprite.my_sprite);
+        enemy.draw(myWindow.window);
         //myWindow.draw(sprite2.my_sprite);
         myWindow.drawShape(RickHitBox.shape);
         myWindow.drawShape(FelixHitBox.shape);

@@ -20,14 +20,17 @@ class Enemy {
         Enemy(Registry *registry);
         ~Enemy();
         int load_sprites(SpriteManager &sprite, CSprite spriteChara);
+        void update(float deltaTime, float x, float y);
+        void draw(sf::RenderWindow& window);
         Registry *registry;
         SpriteManager sprite;
-        HitBox hitboxe;
+        HitBox hitbox;
         CSprite initialCSprite;
         CSprite cSprite;
+        sf::FloatRect rect;
     protected:
     private:
-        Entity entitie;
+        Entity entity;
 };
 
 #endif /* !ENEMY_HPP_ */

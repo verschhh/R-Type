@@ -12,8 +12,6 @@ Missile::Missile(float width, float height, float speed, sf::Color color, sf::Ve
     : launchCooldown(1.0f), missileSpeed(speed), missileDirection(initialDirection), ammo(ammo), currentAmmo(0) {
     missiles.resize(ammo);
     for (int i = 0; i < missiles.size(); i++) {
-        std::cout << width << std::endl;
-        std::cout << height << std::endl;
         missiles[i].setSize(sf::Vector2f(width, height));
         missiles[i].setFillColor(color);
         hitboxes.push_back(HitBox(height, width, 0, 0));

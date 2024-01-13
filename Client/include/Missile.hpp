@@ -14,7 +14,7 @@
     class Missile {
     public:
         Missile(float width, float height, float speed, sf::Color color, sf::Vector2f initialDirection, int ammo);
-        void checkCollision(std::vector<HitBox> hitbox);
+        int checkCollision(std::vector<HitBox> hitbox);
         void update(float deltaTime, float x, float y);
         void draw(sf::RenderWindow& window);
         void shootAmmo(float x, float y);

@@ -7,9 +7,9 @@
 
 #include "../include/Enemy.hpp"
 
-Enemy::Enemy(Registry *registry, std::string asset, int hp) : hitbox(0, 0 , 0 , 0), entity(registry->spawn_entity()), missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(-1.0f, 0.0f), 3) {
+Enemy::Enemy(Registry *registry, std::string asset, int hp, float x, float y) : hitbox(0, 0 , 0 , 0), entity(registry->spawn_entity()), missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(-1.0f, 0.0f), 3) {
     this->registry = registry;
-    initialCSprite = {500, 500, 0.5, 0.5, asset};
+    initialCSprite = {x, y, 0.5, 0.5, asset};
     registry->add_component(entity, std::move(initialCSprite));
     auto &positionArray = registry->get_components<CSprite>();
     this->cSprite = positionArray[entity].value();
@@ -17,6 +17,8 @@ Enemy::Enemy(Registry *registry, std::string asset, int hp) : hitbox(0, 0 , 0 , 
     rect = sprite.my_sprite.getGlobalBounds();
     hitbox = HitBox(rect.height, rect.width, cSprite.x, cSprite.y);
     this->hp = hp;
+    this->x = x;
+    this->y = y;
 }
 
 int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {
@@ -34,15 +36,12 @@ void Enemy::update(float deltaTime, float x, float y) {
     hitbox.update(x, y);
     sprite.setPosition(x, y);
     missile.update(0.016f, x, y);
+    this->x = x;
+    this->y = y;
 }
 
 void Enemy::draw(sf::RenderWindow& window) {
-    update(0, cSprite.x, cSprite.y);
     window.draw(sprite.my_sprite);
     window.draw(hitbox.shape);
     missile.draw(window);
-}
-
-Enemy::~Enemy()
-{
 }

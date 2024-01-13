@@ -10,7 +10,7 @@
 Player::Player(Registry *registry, std::string asset, int hp) : hitbox(0, 0 , 0 , 0), entity(registry->spawn_entity()), missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(1.0f, 0.0f), 3) {
     this->registry = registry;
     input = Input();
-    initialCSprite = {0.0, 0.0, 0.5, 0.5, asset};
+    initialCSprite = {100, 100, 0.5, 0.5, asset};
     this->registry->add_component(entity, std::move(initialCSprite));
     auto &positionArray = this->registry->get_components<CSprite>();
     this->cSprite = positionArray[entity].value();
@@ -48,6 +48,7 @@ void Player::draw(sf::RenderWindow& window)
     window.draw(sprite.my_sprite);
     window.draw(hitbox.shape);
     missile.draw(window);
+    std::cout << missile.missiles.size() << std::endl;
 }
 
 Player::~Player()

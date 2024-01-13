@@ -51,10 +51,12 @@ void Missile::launch(float x, float y, sf::Vector2f direction) {
     missileDirection = direction;
 }
 
-void Missile::checkCollision(std::vector<HitBox> hitbox) {
+int Missile::checkCollision(std::vector<HitBox> hitbox) {
     for (int i = 0; i < hitboxes.size(); i++) {
         if (hitboxes[i].checkCollision(hitbox) == 1) {
-            std::cout << "Collision" << std::endl;
+            missiles[i].setPosition(2000, 2000);
+            return 1;
         }
     }
+    return -1;
 }

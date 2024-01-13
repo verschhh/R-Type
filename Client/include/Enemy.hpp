@@ -18,8 +18,8 @@
 
 class Enemy {
     public:
-        Enemy(Registry *registry, std::string asset, int hp);
-        ~Enemy();
+        Enemy(Registry *registry, std::string asset, int hp, float x, float y);
+        ~Enemy() = default;
         int load_sprites(SpriteManager &sprite, CSprite spriteChara);
         void update(float deltaTime, float x, float y);
         void draw(sf::RenderWindow& window);
@@ -31,6 +31,8 @@ class Enemy {
         Missile missile;
         sf::FloatRect rect;
         int hp;
+        int x;
+        int y;
     protected:
     private:
         Entity entity;

@@ -52,16 +52,16 @@ int load_sprites(SpriteManager &sprite, CSprite spriteChara) {
 
 void handleMouvement(CSprite *mySprite, Input my_input, SpriteManager *sprite) {
     if (my_input.isDPressed()) {
-            mySprite->x = my_input.moveRight(mySprite->x, 0.2);
+            mySprite->x = my_input.moveRight(mySprite->x, 0.8);
     }
     if (my_input.isQPressed()) {
-        mySprite->x = my_input.moveLeft(mySprite->x, 0.2);
+        mySprite->x = my_input.moveLeft(mySprite->x, 0.8);
     }
     if (my_input.isZPressed()) {
-        mySprite->y = my_input.moveUp(mySprite->y, 0.2);
+        mySprite->y = my_input.moveUp(mySprite->y, 0.8);
     }
     if (my_input.isSPressed()) {
-        mySprite->y = my_input.moveDown(mySprite->y, 0.2);
+        mySprite->y = my_input.moveDown(mySprite->y, 0.8);
     }
     sprite->setPosition(mySprite->x, mySprite->y);
 }
@@ -76,17 +76,32 @@ int main() {
     registry.register_component<Input>();
 
     // create the sprite
-    Enemy enemy(&registry, "./Client/Assets/Image/Felix.png", 3);
     Player player(&registry, "./Client/Assets/Image/rick.png", 3);
-
+    std::vector<std::unique_ptr<Enemy>> enemies;
+    for (int i = 0; i < 5; ++i) {
+        float x = 100.0f * (i + 1);
+        float y = 100.0f * (i + 1);
+       enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Felix.png", 1, x, y));
+    }
     while (myWindow.isOpen()) {
         events(myWindow);
         handleMouvement(&player.cSprite, player.input, &player.sprite);
 
 
         myWindow.clear();
-        enemy.draw(myWindow.window);
-        player.draw(myWindow.window);
+        for (auto& enemy : enemies) {
+            if (enemy && enemy->hp > 0) {
+                enemy->draw(myWindow.window);
+            } else {
+                enemy.reset();
+            }
+            if (enemy && player.missile.checkCollision({enemy->hitbox}) == true)
+                enemy->hp -= 1;
+            if (enemy && enemy->missile.checkCollision({player.hitbox}) == true)
+                player.hp -= 1;
+        }
+        if (player.hp > 0)
+            player.draw(myWindow.window);
         myWindow.display();
     }
 }

@@ -5,13 +5,11 @@
 ** main.cpp
 */
 
-/*
+
 #include <iostream>
 #include "Registry.hpp"
 #include "Components.hpp"
 
-/** @file main.cpp
-*/
 
 /**
  * @brief Adds two integers.
@@ -50,8 +48,6 @@ int ecs() {
     return 0;
 }
 
-#include <optional>
-
 void test(Registry registry)
 {
     registry.register_component<Position>();
@@ -73,14 +69,13 @@ void test(Registry registry)
     Position mySecondPosition = secondArray[myEntity].value();
     std::cout << "Updated position for entity " << static_cast<std::size_t>(myEntity)
               << ": x = " << mySecondPosition.x << ", y = " << mySecondPosition.y << std::endl;
-
-
 }
 
 int main() {
-    Registry registry;
 
-    test(registry);
+    // Registry registry;
+
+    // test(registry);
 
 
     // Entity myEntity = registry.spawn_entity();

@@ -10,12 +10,12 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 # project(R-Type-Common VERSION 1.0)
 
 # Specify the C++ standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add the executable target
 # add_executable(R-TypeServer ./Server/src/Server.cpp ./Server/src/Parser.cpp ./Server/include/Parser.hpp ./Server/include/Server.hpp ./Engine/Network/Network.hpp ./Engine/Network/NLib.hpp)
 # add_executable()
-add_executable(R-TypeCommon ./Client/src/main.cpp ./Client/include/Window.hpp ./Client/include/Sound.hpp ./Client/include/Sprite.hpp ./Client/include/Input.hpp)
+add_executable(R-TypeCommon ./Client/src/main.cpp ./Client/src/Input.cpp ./Client/src/Missile.cpp ./Client/include/Sprite.hpp ./Client/include/Components.hpp ./Client/include/Input.hpp ./Client/include/Sound.hpp ./Client/include/IGraphics.hpp ./Client/include/Missile.hpp ./Client/include/HitBox.hpp ./Client/src/HitBox.cpp ./Client/include/Enemy.hpp ./Client/src/Enemy.cpp ./Client/include/Player.hpp ./Client/src/Player.cpp)
 
 target_link_libraries(R-TypeCommon sfml-graphics sfml-audio)

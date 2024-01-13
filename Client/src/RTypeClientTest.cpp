@@ -27,6 +27,12 @@ int main() {
         // Send a "new" message to simulate a new connection
         cSender.send("new " + sender_ip + ":" + std::to_string(cSender.get_port()));
 
+        // wait for server response
+        std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+        //print all messages received
+        for (auto& message : cReceiver.GetReceivedData()) {
+            std::cout << message << std::endl;
+        }
         // init Player
         // init game loop
 

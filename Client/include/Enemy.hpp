@@ -17,17 +17,17 @@
 
 class Enemy {
     public:
-        Enemy(Registry registry);
+        Enemy(Registry *registry);
         ~Enemy();
         int load_sprites(SpriteManager &sprite, CSprite spriteChara);
-        Registry registry;
+        Registry *registry;
         SpriteManager sprite;
         HitBox hitboxe;
-        Entity entitie;
         CSprite initialCSprite;
         CSprite cSprite;
     protected:
     private:
+        Entity entitie;
 };
 
 #endif /* !ENEMY_HPP_ */

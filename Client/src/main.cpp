@@ -105,9 +105,9 @@ int main() {
     load_sprites(sprite, mySprite);
     load_sprites(sprite2, mySprite2);
     std::cout << "Enemy" << std::endl;
-    Enemy enemy(registry);
+    Enemy enemy(&registry);
     std::cout << "Enemy" << std::endl;
-    
+
     while (myWindow.isOpen()) {
         events(myWindow);
         handleMouvement(&mySprite, my_input, &sprite);

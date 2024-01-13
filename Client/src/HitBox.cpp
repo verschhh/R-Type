@@ -10,6 +10,7 @@
 
 HitBox::HitBox(float height, float width, float x, float y)
 {
+    std::cout << "In" << std::endl;
     this->height = height;
     this->width = width;
     this->x = x;

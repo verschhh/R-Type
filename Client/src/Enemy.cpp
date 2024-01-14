@@ -72,7 +72,7 @@ void Enemy::update(float deltaTime, float x, float y) {
     hitbox.update(x, y);
     sprite.setPosition(x, y);
     if (cSprite.x < 1920 && cSprite.x > 0 && cSprite.y < 1080 && cSprite.y > 0)
-        missile.update(0.016f, x, y);
+        missile.update(0.016f, x, y + 50);
 }
 
 void Enemy::draw(sf::RenderWindow& window) {

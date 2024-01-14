@@ -18,20 +18,23 @@ add_executable(R-TypeServer ./Server/src/main.cpp ./Server/src/playerData.cpp ./
 # add_executable(R-TypeClient ./Client/src/RTypeClientTest.cpp)
 add_executable(R-TypeCommon
     ./Client/src/main.cpp
+    ./Client/src/Enemy.cpp
+    ./Client/src/HitBox.cpp
     ./Client/src/Input.cpp
     ./Client/src/Missile.cpp
-    ./Client/src/HitBox.cpp
     ./Client/src/Player.cpp
-    ./Client/src/Enemy.cpp
-    ./Client/include/Sprite.hpp
-    ./Client/include/Components.hpp
-    ./Client/include/Input.hpp
-    ./Client/include/Sound.hpp
-    ./Client/include/IGraphics.hpp
-    ./Client/include/Missile.hpp
-    ./Client/include/HitBox.hpp
-    ./Client/include/Player.hpp
+    ./Client/src/RTypeClientTest.cpp
     ./Client/include/Enemy.hpp
+    ./Client/include/Button.hpp
+    ./Client/include/Components.hpp
+    ./Client/include/HitBox.hpp
+    ./Client/include/IGraphics.hpp
+    ./Client/include/Input.hpp
+    ./Client/include/mainLoop.hpp
+    ./Client/include/Missile.hpp
+    ./Client/include/Player.hpp
+    ./Client/include/Sound.hpp
+    ./Client/include/Sprite.hpp
     )
 
 target_link_libraries(R-TypeCommon

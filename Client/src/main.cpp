@@ -159,7 +159,7 @@ int game(SfmlWindow &myWindow) {
     // create the player and the enemies
     std::vector<std::unique_ptr<Enemy>> enemies;
     enemies = spawnNewWave(registry);
-    std::unique_ptr<Player> player = std::make_unique<Player>(registry, rick);
+    std::unique_ptr<Player> player(new Player(&registry, "./Client/Assets/Image/rick.png", 3));
 
     // load the sprites
     CSprite backgound = {0.0, 0.0, 1, 1, "./Client/Assets/Image/star.jpg"};
@@ -203,41 +203,17 @@ int game(SfmlWindow &myWindow) {
     sf::Text pauseText("Paused", font, 40);
     pauseText.setPosition(840, 210);
 
-    sf::Text stopText("||", font, 30);
+    sf::Text stopText(" ||", font, 30);
     stopText.setPosition(50, 50);
 
     GameState gameState = GameState::Playing;
 
     while (myWindow.isOpen()) {
-        // gameState = gameEvents(myWindow, gameState, playButton, quitButton, stopButton, enemies, player);
         gameState = gameEvents(myWindow, gameState, playButton, quitButton, stopButton);
          if (player) {
              handleMouvement(&player->cSprite, player->input, &player->sprite);
          }
         myWindow.clear();
-//         for (auto& enemy : enemies) {
-//             if (enemy) {
-//                 if (enemy->cSprite.x < 0) {
-//                     std::cout << "Player hp go down" << std::endl;
-//                     player->hp -= 1;
-//                     enemy->hp = 0;
-//                     enemy->cSprite.y = -1000;
-//                 }
-//                 if (enemy->hp > 0) {
-//                     enemy->draw(myWindow.window);
-//                     if (player->missile.checkCollision({enemy->hitbox}) == true)
-//                         enemy->hp -= 1;
-//                     if (enemy->missile.checkCollision({player->hitbox}) == true)
-//                         player->hp -= 1;
-//                 }
-//             }
-//         }
-        if (player) {
-            if (player->hp > 0) {
-                player->draw(myWindow.window);
-            }
-        }
-
         if (gameState == GameState::Exit) {
             return -1;
         }
@@ -257,15 +233,34 @@ int game(SfmlWindow &myWindow) {
                 sprite[3].setPosition(1920, std::rand() % 1080);
             }
 
-            // missile.update(0.016f, mySprite.x, mySprite.y);
             myWindow.draw(sprite[0].my_sprite);
             myWindow.draw(sprite[1].my_sprite);
             myWindow.draw(sprite[2].my_sprite);
             myWindow.draw(sprite[3].my_sprite);
+            for (auto& enemy : enemies) {
+                if (enemy) {
+                    if (enemy->cSprite.x < 0) {
+                        std::cout << "Player hp go down" << std::endl;
+                        player->hp -= 1;
+                        enemy->hp = 0;
+                        enemy->cSprite.y = -1000;
+                    }
+                    if (enemy->hp > 0) {
+                        enemy->draw(myWindow.window);
+                        if (player->missile.checkCollision({enemy->hitbox}) == true)
+                            enemy->hp -= 1;
+                        if (enemy->missile.checkCollision({player->hitbox}) == true)
+                            player->hp -= 1;
+                    }
+                }
+            }
+            if (player) {
+                if (player->hp > 0) {
+                    player->draw(myWindow.window);
+                }
+            }
             myWindow.drawShape(stopButton);
             myWindow.drawText(stopText);
-            // myWindow.draw(sprite[0].my_sprite);
-            // myWindow.drawShape(missile.shape);
         } else if (gameState == GameState::Paused) {
             myWindow.drawText(pauseText);
             myWindow.drawShape(playButton);

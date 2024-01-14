@@ -1,5 +1,13 @@
+/*
+** EPITECH PROJECT, 2023
+** R-Type
+** File description:
+** main.cpp
+*/
+
 #include <boost/asio.hpp>
 #include <iostream>
+#include "../include/playerData.hpp"
 
 boost::asio::ip::address getIp()
 {
@@ -28,22 +36,17 @@ void handle_connection(boost::asio::ip::tcp::socket& socket) {
 
             std::cout << "Received from client: " << message;
 
-            // Process the message if needed
+            Player myPlayer;
+            int id = myPlayer.getPlayerId();
 
-            // Send a response back to the client
-            std::string response = "Server received: " + message;
+            std::string response = "Player: " + std::to_string(id);
             boost::asio::write(socket, boost::asio::buffer(response + "\n"));
 
-            // If the message indicates the end of communication, break out of the loop
             if (message == "bye\n") {
                 break;
             }
-
-            // Clear the buffer for the next iteration
             buffer.consume(buffer.size());
         }
-
-        // Close the socket
         socket.close();
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;

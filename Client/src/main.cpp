@@ -18,6 +18,7 @@
 enum class GameState {
     Playing,
     Paused,
+    Exit,
 };
 
 int launch_music(Sound &music, std::string file) {
@@ -69,6 +70,7 @@ GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleSha
     while (myWindow.pollEvent(event)) {
         if (myWindow.isClosedEvent(event)) {
             myWindow.close();
+            return GameState::Exit;
         } else if (event.type == sf::Event::MouseButtonPressed) {
             sf::Vector2i mousePos = sf::Mouse::getPosition(myWindow.window);
             if (gameState == GameState::Playing) {
@@ -81,6 +83,7 @@ GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleSha
                 }
                 else if (quitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                     myWindow.close();
+                    return GameState::Exit;
                 }
             }
         }
@@ -88,7 +91,7 @@ GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleSha
     return gameState;
 }
 
-void game(SfmlWindow &myWindow) {
+int game(SfmlWindow &myWindow) {
     Missile missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(1.0f, 0.0f));
     Registry registry;
     SpriteManager sprite[4];
@@ -157,6 +160,9 @@ void game(SfmlWindow &myWindow) {
 
 
         myWindow.clear();
+        if (gameState == GameState::Exit) {
+            return -1;
+        }
         if (gameState == GameState::Playing) {
             move(&sprite[2].my_sprite , velocity);
             move(&sprite[3].my_sprite, velocity_paul);
@@ -186,30 +192,32 @@ void game(SfmlWindow &myWindow) {
         }
         myWindow.display();
     }
+    return 0;
 }
 
 
 
-void events(SfmlWindow &myWindow, sf::RectangleShape playButton, sf::RectangleShape quitButton) {
+int events(SfmlWindow &myWindow, sf::RectangleShape playButton, sf::RectangleShape quitButton) {
     sf::Event event;
 
     while (myWindow.pollEvent(event)) {
         if (myWindow.isClosedEvent(event)) {
             myWindow.close();
+            return -1;
         } else if (event.type == sf::Event::MouseButtonPressed) {
             sf::Vector2i mousePos = sf::Mouse::getPosition(myWindow.window);
             if (playButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-                game(myWindow);
+                return (game(myWindow));
             } else if (quitButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                 myWindow.close();
+                return -1;
             }
         }
     }
+    return 0;
 }
 
-
-
-int main() {
+int mainLoop() {
     SfmlWindow myWindow(1920, 1080, "R-Type");
 
     sf::RectangleShape playButton(sf::Vector2f(200, 50));
@@ -233,7 +241,9 @@ int main() {
 
     while (myWindow.isOpen()) {
         sf::Event event;
-        events(myWindow, playButton, quitButton);
+        if (events(myWindow, playButton, quitButton) == -1) {
+            return -1;
+        }
         myWindow.clear();
         myWindow.drawShape(playButton);
         myWindow.drawShape(quitButton);

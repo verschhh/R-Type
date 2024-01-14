@@ -1,5 +1,6 @@
 #include <boost/asio.hpp>
 #include <iostream>
+#include "../include/mainLoop.hpp"
 
 // Define a handler for reading data from the server
 bool handle_read(boost::asio::ip::tcp::socket& socket) {
@@ -9,10 +10,6 @@ bool handle_read(boost::asio::ip::tcp::socket& socket) {
         std::string message(boost::asio::buffers_begin(buffer.data()), boost::asio::buffers_end(buffer.data()));
 
         std::cout << "Received from server: " << message;
-
-        if (message == "Server received: bye\n") {
-            socket.close();
-        }
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
         return false;
@@ -48,12 +45,12 @@ int main(int argc, char* argv[]) {
         std::string initialMessage = "Hello, server!\n";
         send_message(socket, "Hello, server!\n");
 
-        // Read and handle responses from the server in a loop
         while (handle_read(socket)) {
-            if (!socket.is_open()) {
+            if (!socket.is_open() || mainLoop() == -1) {
                 break;
             }
         }
+        socket.close();
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }

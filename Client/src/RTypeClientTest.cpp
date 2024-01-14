@@ -1,67 +1,62 @@
-#include <iostream>
 #include <boost/asio.hpp>
-#include <boost/bind.hpp>
-#include <boost/array.hpp>
-#include <random>
+#include <iostream>
 
-using boost::asio::ip::udp;
+// Define a handler for reading data from the server
+bool handle_read(boost::asio::ip::tcp::socket& socket) {
+    try {
+        boost::asio::streambuf buffer;
+        boost::asio::read_until(socket, buffer, '\n');
+        std::string message(boost::asio::buffers_begin(buffer.data()), boost::asio::buffers_end(buffer.data()));
 
-class udpSocket {
-public:
-    udpSocket(boost::asio::io_service& io_service, const std::string& sender_port)
-        : socket_(io_service, udp::endpoint(udp::v4(), 0)) {
-        udp::resolver resolver(io_service);
-        udp::resolver::query query(udp::v4(), "127.0.0.1", sender_port);
-        udp::resolver::iterator iter = resolver.resolve(query);
-        endpoint_ = *iter;
+        std::cout << "Received from server: " << message;
 
-        // Generate a random listener port between 10000 and 99999
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distr(10000, 99999);
-        listener_port_ = distr(gen);
-
-        // Send the listener port and a "Hello Server" message to the sender port
-        std::string msg = std::to_string(listener_port_) + " Hello Server";
-        send(msg);
-    }
-
-    void send(const std::string& msg) {
-        socket_.send_to(boost::asio::buffer(msg, msg.size()), endpoint_);
-    }
-
-    void receive() {
-        socket_.async_receive_from(
-            boost::asio::buffer(recv_buffer_), remote_endpoint_,
-            boost::bind(&udpSocket::handle_receive, this,
-            boost::asio::placeholders::error,
-            boost::asio::placeholders::bytes_transferred));
-    }
-
-    void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred) {
-        if (!error) {
-            std::cout << "Received: " << std::string(recv_buffer_.begin(), recv_buffer_.begin() + bytes_transferred) << std::endl;
+        if (message == "Server received: bye\n") {
+            socket.close();
         }
+    } catch (std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+        return false;
     }
+    return true;
+}
 
-private:
-    udp::socket socket_;
-    udp::endpoint endpoint_;
-    udp::endpoint remote_endpoint_;
-    boost::array<char, 256> recv_buffer_;
-    int listener_port_;
-};
+void send_message(boost::asio::ip::tcp::socket& socket, const std::string& message) {
+    try {
+        // Send a message to the server
+        boost::asio::write(socket, boost::asio::buffer(message + "\n"));
+    } catch (std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
+}
 
 int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        std::cerr << "Usage: udp_client <sender_port>\n";
-        return 1;
-    }
+    try {
+        if (argc != 3) {
+            std::cerr << "Usage: " << argv[0] << " <server_ip> <server_port>" << std::endl;
+            return 1;
+        }
 
-    boost::asio::io_service io_service;
-    udpSocket s(io_service, argv[1]);
-    s.receive();
-    io_service.run();
+        boost::asio::io_service io_service;
+        boost::asio::ip::tcp::socket socket(io_service);
+        std::string serverIP = argv[1];
+        unsigned short serverPort = static_cast<unsigned short>(std::stoi(argv[2]));
+
+        boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string(serverIP), serverPort);
+
+        socket.connect(endpoint);
+
+        std::string initialMessage = "Hello, server!\n";
+        send_message(socket, "Hello, server!\n");
+
+        // Read and handle responses from the server in a loop
+        while (handle_read(socket)) {
+            if (!socket.is_open()) {
+                break;
+            }
+        }
+    } catch (std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
 
     return 0;
 }

@@ -1,0 +1,109 @@
+\hypertarget{classSpriteManager}{}\doxysection{Sprite\+Manager Class Reference}
+\label{classSpriteManager}\index{SpriteManager@{SpriteManager}}
+
+
+{\ttfamily \#include $<$Sprite.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSpriteManager_aaded6a6cdc9a6a75490f3f552359caff}{Sprite\+Manager}} ()=default
+\item 
+bool \mbox{\hyperlink{classSpriteManager_a8472c55ee5690a6d9f708958a9fc34dd}{load\+From\+File}} (std\+::string file)
+\item 
+void \mbox{\hyperlink{classSpriteManager_a415e014334af5f85739fcdc4e9906e6d}{set\+Texture}} ()
+\item 
+void \mbox{\hyperlink{classSpriteManager_a7933be805fbd8cb6b35c1996d35b18c3}{set\+Scale}} (float x, float y)
+\item 
+void \mbox{\hyperlink{classSpriteManager_abaa52af4cfde17ad4e7898b8aaaa4365}{set\+Position}} (float x, float y)
+\item 
+sf\+::\+Vector2f \mbox{\hyperlink{classSpriteManager_a55c1c867d127aad6372ef1453d482259}{get\+Position}} ()
+\item 
+void \mbox{\hyperlink{classSpriteManager_ac9c29c77419bcc7e371613d058cf4001}{add\+Sprite}} (const sf\+::\+Sprite \&sprite)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ sf\+::\+Sprite $>$ \mbox{\hyperlink{classSpriteManager_a2c5e7cb3add33f56de37fd699b189a24}{sprites}}
+\item 
+sf\+::\+Sprite \mbox{\hyperlink{classSpriteManager_a6c3c519a5f3dcd7f7b57315427a77930}{my\+\_\+sprite}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Texture \mbox{\hyperlink{classSpriteManager_a701b76de457b9f21924b96af78b58c2e}{texture}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSpriteManager_aaded6a6cdc9a6a75490f3f552359caff}\label{classSpriteManager_aaded6a6cdc9a6a75490f3f552359caff}} 
+\index{SpriteManager@{SpriteManager}!SpriteManager@{SpriteManager}}
+\index{SpriteManager@{SpriteManager}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{SpriteManager()}{SpriteManager()}}
+{\footnotesize\ttfamily Sprite\+Manager\+::\+Sprite\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSpriteManager_ac9c29c77419bcc7e371613d058cf4001}\label{classSpriteManager_ac9c29c77419bcc7e371613d058cf4001}} 
+\index{SpriteManager@{SpriteManager}!addSprite@{addSprite}}
+\index{addSprite@{addSprite}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{addSprite()}{addSprite()}}
+{\footnotesize\ttfamily void Sprite\+Manager\+::add\+Sprite (\begin{DoxyParamCaption}\item[{const sf\+::\+Sprite \&}]{sprite }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSpriteManager_a55c1c867d127aad6372ef1453d482259}\label{classSpriteManager_a55c1c867d127aad6372ef1453d482259}} 
+\index{SpriteManager@{SpriteManager}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Sprite\+Manager\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSpriteManager_a8472c55ee5690a6d9f708958a9fc34dd}\label{classSpriteManager_a8472c55ee5690a6d9f708958a9fc34dd}} 
+\index{SpriteManager@{SpriteManager}!loadFromFile@{loadFromFile}}
+\index{loadFromFile@{loadFromFile}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{loadFromFile()}{loadFromFile()}}
+{\footnotesize\ttfamily bool Sprite\+Manager\+::load\+From\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSpriteManager_abaa52af4cfde17ad4e7898b8aaaa4365}\label{classSpriteManager_abaa52af4cfde17ad4e7898b8aaaa4365}} 
+\index{SpriteManager@{SpriteManager}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily void Sprite\+Manager\+::set\+Position (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSpriteManager_a7933be805fbd8cb6b35c1996d35b18c3}\label{classSpriteManager_a7933be805fbd8cb6b35c1996d35b18c3}} 
+\index{SpriteManager@{SpriteManager}!setScale@{setScale}}
+\index{setScale@{setScale}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{setScale()}{setScale()}}
+{\footnotesize\ttfamily void Sprite\+Manager\+::set\+Scale (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSpriteManager_a415e014334af5f85739fcdc4e9906e6d}\label{classSpriteManager_a415e014334af5f85739fcdc4e9906e6d}} 
+\index{SpriteManager@{SpriteManager}!setTexture@{setTexture}}
+\index{setTexture@{setTexture}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{setTexture()}{setTexture()}}
+{\footnotesize\ttfamily void Sprite\+Manager\+::set\+Texture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSpriteManager_a6c3c519a5f3dcd7f7b57315427a77930}\label{classSpriteManager_a6c3c519a5f3dcd7f7b57315427a77930}} 
+\index{SpriteManager@{SpriteManager}!my\_sprite@{my\_sprite}}
+\index{my\_sprite@{my\_sprite}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{my\_sprite}{my\_sprite}}
+{\footnotesize\ttfamily sf\+::\+Sprite Sprite\+Manager\+::my\+\_\+sprite}
+
+\mbox{\Hypertarget{classSpriteManager_a2c5e7cb3add33f56de37fd699b189a24}\label{classSpriteManager_a2c5e7cb3add33f56de37fd699b189a24}} 
+\index{SpriteManager@{SpriteManager}!sprites@{sprites}}
+\index{sprites@{sprites}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{sprites}{sprites}}
+{\footnotesize\ttfamily std\+::vector$<$sf\+::\+Sprite$>$ Sprite\+Manager\+::sprites}
+
+\mbox{\Hypertarget{classSpriteManager_a701b76de457b9f21924b96af78b58c2e}\label{classSpriteManager_a701b76de457b9f21924b96af78b58c2e}} 
+\index{SpriteManager@{SpriteManager}!texture@{texture}}
+\index{texture@{texture}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{texture}{texture}}
+{\footnotesize\ttfamily sf\+::\+Texture Sprite\+Manager\+::texture\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/maxime/\+Troisième/\+R-\/\+Type/\+Client/include/\mbox{\hyperlink{Sprite_8hpp}{Sprite.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,111 @@
+\hypertarget{Client_2src_2main_8cpp}{}\doxysection{/home/maxime/\+Troisième/\+R-\/\+Type/\+Client/src/main.cpp File Reference}
+\label{Client_2src_2main_8cpp}\index{/home/maxime/Troisième/R-\/Type/Client/src/main.cpp@{/home/maxime/Troisième/R-\/Type/Client/src/main.cpp}}
+{\ttfamily \#include \char`\"{}../include/\+IGraphics.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+Sprite.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+Components.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../../\+Server/include/\+Registry.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+Sound.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+Input.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+Missile.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} \{ \mbox{\hyperlink{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285ac9dbb2b7c84159b632d71e512eba8428}{Playing}}
+, \mbox{\hyperlink{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285ae99180abf47a8b3a856e0bcb2656990a}{Paused}}
+, \mbox{\hyperlink{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285afef46e5063ce3dc78b8ae64fa474241d}{Exit}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{Client_2src_2main_8cpp_a09f384d0d85720d523877fe14efc510f}{launch\+\_\+music}} (\mbox{\hyperlink{classSound}{Sound}} \&music, std\+::string file)
+\item 
+int \mbox{\hyperlink{Client_2src_2main_8cpp_ab91866cd7f81f4b8b8c030644bd7b0c4}{load\+\_\+sprites}} (\mbox{\hyperlink{classSpriteManager}{Sprite\+Manager}} \&sprite, \mbox{\hyperlink{structCSprite}{CSprite}} sprite\+Chara)
+\item 
+void \mbox{\hyperlink{Client_2src_2main_8cpp_a7167227fbf8ccdc60a115f886dc31eb0}{handle\+Mouvement}} (\mbox{\hyperlink{structCSprite}{CSprite}} $\ast$my\+Sprite, \mbox{\hyperlink{classInput}{Input}} my\+\_\+input, \mbox{\hyperlink{classSpriteManager}{Sprite\+Manager}} $\ast$sprite)
+\item 
+void \mbox{\hyperlink{Client_2src_2main_8cpp_a57cb323729847c69855dfcb16d9d1545}{move}} (sf\+::\+Sprite $\ast$sprite, const sf\+::\+Vector2f \&velocity)
+\item 
+\mbox{\hyperlink{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} \mbox{\hyperlink{Client_2src_2main_8cpp_aa518f7303281a8bb5355c9d00a663503}{game\+Events}} (\mbox{\hyperlink{classSfmlWindow}{Sfml\+Window}} \&my\+Window, \mbox{\hyperlink{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} game\+State, sf\+::\+Rectangle\+Shape play\+Button, sf\+::\+Rectangle\+Shape quit\+Button)
+\item 
+int \mbox{\hyperlink{Client_2src_2main_8cpp_a9afc1355d2e76284502a2f8cefda6bb0}{game}} (\mbox{\hyperlink{classSfmlWindow}{Sfml\+Window}} \&my\+Window)
+\item 
+int \mbox{\hyperlink{Client_2src_2main_8cpp_a0be925be983c7b8b180d8cd584924b22}{events}} (\mbox{\hyperlink{classSfmlWindow}{Sfml\+Window}} \&my\+Window, sf\+::\+Rectangle\+Shape play\+Button, sf\+::\+Rectangle\+Shape quit\+Button)
+\item 
+int \mbox{\hyperlink{Client_2src_2main_8cpp_a56a4c88966159c3f2eedead5470a0edf}{main\+Loop}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285}\label{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285}} 
+\index{main.cpp@{main.cpp}!GameState@{GameState}}
+\index{GameState@{GameState}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{GameState}{GameState}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Playing@{Playing}!main.cpp@{main.cpp}}\index{main.cpp@{main.cpp}!Playing@{Playing}}}\mbox{\Hypertarget{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285ac9dbb2b7c84159b632d71e512eba8428}\label{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285ac9dbb2b7c84159b632d71e512eba8428}} 
+Playing&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Paused@{Paused}!main.cpp@{main.cpp}}\index{main.cpp@{main.cpp}!Paused@{Paused}}}\mbox{\Hypertarget{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285ae99180abf47a8b3a856e0bcb2656990a}\label{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285ae99180abf47a8b3a856e0bcb2656990a}} 
+Paused&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Exit@{Exit}!main.cpp@{main.cpp}}\index{main.cpp@{main.cpp}!Exit@{Exit}}}\mbox{\Hypertarget{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285afef46e5063ce3dc78b8ae64fa474241d}\label{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285afef46e5063ce3dc78b8ae64fa474241d}} 
+Exit&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Client_2src_2main_8cpp_a0be925be983c7b8b180d8cd584924b22}\label{Client_2src_2main_8cpp_a0be925be983c7b8b180d8cd584924b22}} 
+\index{main.cpp@{main.cpp}!events@{events}}
+\index{events@{events}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{events()}{events()}}
+{\footnotesize\ttfamily int events (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSfmlWindow}{Sfml\+Window}} \&}]{my\+Window,  }\item[{sf\+::\+Rectangle\+Shape}]{play\+Button,  }\item[{sf\+::\+Rectangle\+Shape}]{quit\+Button }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Client_2src_2main_8cpp_a9afc1355d2e76284502a2f8cefda6bb0}\label{Client_2src_2main_8cpp_a9afc1355d2e76284502a2f8cefda6bb0}} 
+\index{main.cpp@{main.cpp}!game@{game}}
+\index{game@{game}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{game()}{game()}}
+{\footnotesize\ttfamily int game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSfmlWindow}{Sfml\+Window}} \&}]{my\+Window }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Client_2src_2main_8cpp_aa518f7303281a8bb5355c9d00a663503}\label{Client_2src_2main_8cpp_aa518f7303281a8bb5355c9d00a663503}} 
+\index{main.cpp@{main.cpp}!gameEvents@{gameEvents}}
+\index{gameEvents@{gameEvents}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{gameEvents()}{gameEvents()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} game\+Events (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSfmlWindow}{Sfml\+Window}} \&}]{my\+Window,  }\item[{\mbox{\hyperlink{Client_2src_2main_8cpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}}}]{game\+State,  }\item[{sf\+::\+Rectangle\+Shape}]{play\+Button,  }\item[{sf\+::\+Rectangle\+Shape}]{quit\+Button }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Client_2src_2main_8cpp_a7167227fbf8ccdc60a115f886dc31eb0}\label{Client_2src_2main_8cpp_a7167227fbf8ccdc60a115f886dc31eb0}} 
+\index{main.cpp@{main.cpp}!handleMouvement@{handleMouvement}}
+\index{handleMouvement@{handleMouvement}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{handleMouvement()}{handleMouvement()}}
+{\footnotesize\ttfamily void handle\+Mouvement (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCSprite}{CSprite}} $\ast$}]{my\+Sprite,  }\item[{\mbox{\hyperlink{classInput}{Input}}}]{my\+\_\+input,  }\item[{\mbox{\hyperlink{classSpriteManager}{Sprite\+Manager}} $\ast$}]{sprite }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Client_2src_2main_8cpp_a09f384d0d85720d523877fe14efc510f}\label{Client_2src_2main_8cpp_a09f384d0d85720d523877fe14efc510f}} 
+\index{main.cpp@{main.cpp}!launch\_music@{launch\_music}}
+\index{launch\_music@{launch\_music}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{launch\_music()}{launch\_music()}}
+{\footnotesize\ttfamily int launch\+\_\+music (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSound}{Sound}} \&}]{music,  }\item[{std\+::string}]{file }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Client_2src_2main_8cpp_ab91866cd7f81f4b8b8c030644bd7b0c4}\label{Client_2src_2main_8cpp_ab91866cd7f81f4b8b8c030644bd7b0c4}} 
+\index{main.cpp@{main.cpp}!load\_sprites@{load\_sprites}}
+\index{load\_sprites@{load\_sprites}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{load\_sprites()}{load\_sprites()}}
+{\footnotesize\ttfamily int load\+\_\+sprites (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSpriteManager}{Sprite\+Manager}} \&}]{sprite,  }\item[{\mbox{\hyperlink{structCSprite}{CSprite}}}]{sprite\+Chara }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Client_2src_2main_8cpp_a56a4c88966159c3f2eedead5470a0edf}\label{Client_2src_2main_8cpp_a56a4c88966159c3f2eedead5470a0edf}} 
+\index{main.cpp@{main.cpp}!mainLoop@{mainLoop}}
+\index{mainLoop@{mainLoop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{mainLoop()}{mainLoop()}}
+{\footnotesize\ttfamily int main\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Client_2src_2main_8cpp_a57cb323729847c69855dfcb16d9d1545}\label{Client_2src_2main_8cpp_a57cb323729847c69855dfcb16d9d1545}} 
+\index{main.cpp@{main.cpp}!move@{move}}
+\index{move@{move}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void move (\begin{DoxyParamCaption}\item[{sf\+::\+Sprite $\ast$}]{sprite,  }\item[{const sf\+::\+Vector2f \&}]{velocity }\end{DoxyParamCaption})}
+

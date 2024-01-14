@@ -19,7 +19,7 @@ Enemy::Enemy(Registry *registry, std::string asset, int hp, float x, float y) : 
     this->hp = hp;
     this->x = x;
     this->y = y;
-    launchCooldown = 1;
+    launchCooldown = 0.2f;
 }
 
 int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {
@@ -35,16 +35,17 @@ int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {
 
 void Enemy::update(float deltaTime, float x, float y) {
     if (cooldown.getElapsedTime().asSeconds() >= launchCooldown) {
-        this->x -= 50;
+        this->x -= 10;
         if (this->y < 50)
             this->y = 1000;
         else
-            this->y -= 50;
+            this->y -= 5;
         cooldown.restart();
     }
     hitbox.update(x, y);
     sprite.setPosition(x, y);
-    missile.update(0.016f, x, y);
+    if (cSprite.x < 1920 && cSprite.x > 0 && cSprite.y < 1080 && cSprite.y > 0)
+        missile.update(0.016f, x, y);
 }
 
 void Enemy::draw(sf::RenderWindow& window) {
@@ -53,5 +54,6 @@ void Enemy::draw(sf::RenderWindow& window) {
     update(0, cSprite.x, cSprite.y);
     window.draw(sprite.my_sprite);
     window.draw(hitbox.shape);
-    missile.draw(window);
+    if (cSprite.x < 1920 && cSprite.x > 0 && cSprite.y < 1080 && cSprite.y > 0)
+        missile.draw(window);
 }

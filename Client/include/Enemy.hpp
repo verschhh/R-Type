@@ -30,7 +30,7 @@ class Enemy {
         CSprite cSprite;
         Missile missile;
         sf::Clock cooldown;
-        int launchCooldown;
+        float launchCooldown;
         sf::FloatRect rect;
         int hp;
         int x;

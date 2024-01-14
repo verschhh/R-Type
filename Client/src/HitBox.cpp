@@ -18,7 +18,7 @@ HitBox::HitBox(float height, float width, float x, float y)
     this->shape.setPosition(sf::Vector2f(this->x, this->y));
     this->shape.setFillColor(sf::Color::Transparent);
     this->shape.setOutlineThickness(1);
-    this->shape.setOutlineColor(sf::Color::Yellow);
+    this->shape.setOutlineColor(sf::Color::Transparent);
 }
 
 void HitBox::update(float x, float y)

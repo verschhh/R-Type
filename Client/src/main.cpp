@@ -12,7 +12,9 @@
 #include "../include/Sound.hpp"
 #include "../include/Input.hpp"
 #include "../include/Missile.hpp"
-
+#include "../include/HitBox.hpp"
+#include "../include/Enemy.hpp"
+#include "../include/Player.hpp"
 #include <iostream>
 
 enum class GameState {
@@ -22,6 +24,15 @@ enum class GameState {
 };
 
 int launch_music(Sound &music, std::string file) {
+    /** launch_music
+     * @brief Launch the music
+     * 
+     * @param music : the music
+     * @param file : the path to the music
+     * 
+     * @return 0 if it is a success, -1 if it is not
+    */
+
     if (!music.loadFromFileMusic(file)) {
         std::cout << "Invalid music file" << std::endl;
         return -1;
@@ -33,7 +44,16 @@ int launch_music(Sound &music, std::string file) {
 }
 
 int load_sprites(SpriteManager &sprite, CSprite spriteChara) {
-     if (!sprite.loadFromFile(spriteChara.file)) {
+    /** load_sprites
+     * @brief Loads the sprite
+     * 
+     * @param sprite : the sprite
+     * @param spriteChara : the spriteChara
+     * 
+     * @return 0 if it is a success, -1 if it is not
+    */
+
+    if (!sprite.loadFromFile(spriteChara.file)) {
         std::cout << "Invalid texture file" << std::endl;
         return -1;
     }
@@ -44,17 +64,30 @@ int load_sprites(SpriteManager &sprite, CSprite spriteChara) {
 }
 
 void handleMouvement(CSprite *mySprite, Input my_input, SpriteManager *sprite) {
+    /** handleMouvement
+     * @brief Handle the mouvement of the player
+     * 
+     * @param mySprite : the sprite of the player
+     * @param my_input : the input of the player
+     * @param sprite : the sprite of the player
+     * 
+     * @return void
+    */
     if (my_input.isDPressed()) {
-            mySprite->x = my_input.moveRight(mySprite->x, 0.4);
+        if (mySprite->x < 1850)
+            mySprite->x = my_input.moveRight(mySprite->x, 0.8);
     }
     if (my_input.isQPressed()) {
-        mySprite->x = my_input.moveLeft(mySprite->x, 0.4);
+        if (mySprite->x > 0)
+            mySprite->x = my_input.moveLeft(mySprite->x, 0.8);
     }
     if (my_input.isZPressed()) {
-        mySprite->y = my_input.moveUp(mySprite->y, 0.4);
+        if (mySprite->y > 0)
+            mySprite->y = my_input.moveUp(mySprite->y, 0.8);
     }
     if (my_input.isSPressed()) {
-        mySprite->y = my_input.moveDown(mySprite->y, 0.4);
+        if (mySprite->y < 950)
+            mySprite->y = my_input.moveDown(mySprite->y, 0.8);
     }
     sprite->setPosition(mySprite->x, mySprite->y);
 }
@@ -95,11 +128,8 @@ GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleSha
 int game(SfmlWindow &myWindow) {
     Missile missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(1.0f, 0.0f));
     Registry registry;
-    SpriteManager sprite[5];
-
     registry.register_component<CSprite>();
     registry.register_component<Input>();
-    Entity rick = registry.spawn_entity();
 
     CSprite initialRick = {0.0, 0.0, 0.5, 0.5, "./Client/Assets/Image/rick.png"};
     CSprite backgound = {0.0, 0.0, 1, 1, "./Client/Assets/Image/star.jpg"};
@@ -166,9 +196,34 @@ int game(SfmlWindow &myWindow) {
 
 
     while (myWindow.isOpen()) {
-        gameState = gameEvents(myWindow, gameState, playButton, quitButton, stopButton);
-        handleMouvement(&mySprite, my_input, &sprite[0]);
+        gameState = gameEvents(myWindow, gameState, playButton, quitButton, stopButton, enemies, player);
+        if (player) {
+            handleMouvement(&player->cSprite, player->input, &player->sprite[0]);
+        }
+        myWindow.clear();
 
+        for (auto& enemy : enemies) {
+            if (enemy) {
+                if (enemy->cSprite.x < 0) {
+                    std::cout << "Player hp go down" << std::endl;
+                    player->hp -= 1;
+                    enemy->hp = 0;
+                    enemy->cSprite.y = -1000;
+                }
+                if (enemy->hp > 0) {
+                    enemy->draw(myWindow.window);
+                    if (player->missile.checkCollision({enemy->hitbox}) == true)
+                        enemy->hp -= 1;
+                    if (enemy->missile.checkCollision({player->hitbox}) == true)
+                        player->hp -= 1;
+                }
+            }
+        }
+        if (player) {
+            if (player->hp > 0) {
+                player->draw(myWindow.window);
+            }
+        }
 
         myWindow.clear();
         if (gameState == GameState::Exit) {

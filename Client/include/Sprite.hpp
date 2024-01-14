@@ -12,8 +12,17 @@
     #include "Missile.hpp"
 
 class SpriteManager {
-    public:
-
+    /**
+     * @brief SpriteManager class
+     * 
+     * This class is used to handle the sprites
+     * 
+     * @param my_sprite : the sprite
+     * @param texture : the texture
+     * @param missiles : the missiles
+     * 
+     * @return nothing
+     */
     public:
 
     SpriteManager() = default;

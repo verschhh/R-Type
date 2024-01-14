@@ -1,0 +1,23 @@
+Enemy.hpp
+    - This header file defines the Enemy class, which is responsible for representing enemies in the game. It includes member variables and functions relevant to enemy behavior.
+
+HitBox.hpp
+    - The HitBox class is defined in this header file. It encapsulates the logic for hitboxes, allowing precise collision detection within the game.
+
+IGraphics.hpp
+    - This header file introduces the IGraphics abstract class. It serves as a base class for graphics-related functionality, defining virtual functions that derived classes will implement.
+
+Input.hpp
+    - The Input class is declared in this file, handling user input for the game. It includes member variables and functions to manage keyboard or controller input.
+
+Missile.hpp
+    - In this header file, the Missile class is defined. It encapsulates the properties and behavior associated with missiles or projectiles within the game.
+
+Player.hpp
+    - The Player class is declared in this header file. It contains member variables and functions related to the player character, encompassing movement, actions, and other relevant attributes.
+
+Sound.hpp
+    - This file introduces the Sound class, responsible for handling in-game audio. It includes functions to manage the playback of various sounds and music.
+
+Sprite.hpp
+    - The Sprite class is defined in this header file, dealing with the representation and manipulation of 2D sprites within the game environment.

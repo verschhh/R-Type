@@ -13,6 +13,9 @@
     #include "Sprite.hpp"
 
 class SfmlWindow {
+    /**
+     * @brief Window class
+     */
 
     public:
 

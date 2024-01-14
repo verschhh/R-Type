@@ -40,7 +40,7 @@ rtype_client
 conan*
 CMakePresets.json
 CMakeFiles
-.vscode
+.vscode/settings.json
 
 vcpkg
 vcpkg_installed
@@ -58,3 +58,4 @@ R-TypeCommon
 !build.sh
 !clean.sh
 !CMakeLists.txt
+!docs/Class.txt

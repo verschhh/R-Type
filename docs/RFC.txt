@@ -37,6 +37,15 @@ Table of Contents
     Every part of the message is separated by a single space character.
     Every message is terminated by a single newline character.
 
+    Exemplary message:
+    < --- 'new 0.0.0.0 : 8080'
+    ---->  'Hello from the server!'
+    ---->   '500;400'
+    ---->   '505;400'
+    ---->   '515;405'
+    ---->   '530;410'
+    < --- 'quit 0.0.0.0 : 8080'
+
 4. Transmitter Behavior
     The transmitter class features a `send` method facilitating message transmission. It initializes a UDP socket, dispatches the message payload to the specified IP address and UDP port, and subsequently closes the socket.
 

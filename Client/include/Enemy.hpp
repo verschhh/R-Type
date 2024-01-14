@@ -18,7 +18,7 @@
 
 class Enemy {
     public:
-        Enemy(Registry *registry, std::string asset, int hp, float x, float y);
+        Enemy(Registry *registry, std::string asset, int hp, float x, float y, int Color);
         ~Enemy() = default;
         int load_sprites(SpriteManager &sprite, CSprite spriteChara);
         void update(float deltaTime, float x, float y);

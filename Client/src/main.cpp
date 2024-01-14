@@ -69,28 +69,41 @@ void handleMouvement(CSprite *mySprite, Input my_input, SpriteManager *sprite) {
 }
 
 std::vector<std::unique_ptr<Enemy>> spawnNewWave(Registry &registry) {
-    srand(time(NULL));
-    int random = rand() % 4;
+   // srand(time(NULL));
+   // int random = rand() % 4;
     std::vector<std::unique_ptr<Enemy>> enemies;
-    if (random == 0) {
-        for (int i = 0; i < 5; ++i) {
-            float x = 1920.0f + (100  * (i + 1));
-            float y = 500 + (200 * (i + 1));
-            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Felix.png", 1, x, y));
-        }
-    } else if (random == 1) {
-        for (int i = 0; i < 5; ++i) {
-            float x = 1920.0f + (100  * (i + 1));
-            float y = 0 + (200 * (i + 1));
-            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Ben.png", 1, x, y));
-        }
-    } else {
-        for (int i = 0; i < 5; ++i) {
-            float x = 1920.0f + (100  * (i + 1));
-            float y = 800 + (50 * (i + 1));
-            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Kentin.png", 1, x, y));
-        }
-    }
+   // if (random == 0) {
+   //     for (int i = 0; i < 5; ++i) {
+   //         float x = 1920.0f + (100  * (i + 1));
+   //         float y = 500 + (200 * (i + 1));
+   //         enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Felix.png", 1, x, y, 0));
+   //     }
+   // } else if (random == 1) {
+   //     for (int i = 0; i < 5; ++i) {
+   //         float x = 1920.0f + (100  * (i + 1));
+   //         float y = 0 + (200 * (i + 1));
+   //         enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Ben.png", 1, x, y, 1));
+   //     }
+   // } else {
+   //     for (int i = 0; i < 5; ++i) {
+   //         float x = 1920.0f + (100  * (i + 1));
+   //         float y = 800 + (50 * (i + 1));
+   //         enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Kentin.png", 1, x, y, 2));
+   //     }
+   // }
+   // return enemies;
+   srand(time(NULL));
+   for (int i = 0; i < 5; ++i) {
+        int random = rand() % 3;
+        float x = 1920.0f;
+        float y = 0 + (200 * (random  + i));
+        if (random == 0)
+            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Felix.png", 1, x, y, 0));
+        else if (random == 1)
+            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Ben.png", 1, x, y, 1));
+        else
+            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Kentin.png", 1, x, y, 2));
+   }
     return enemies;
 }
 
@@ -107,7 +120,6 @@ int main() {
     std::unique_ptr<Player> player(new Player(&registry, "./Client/Assets/Image/rick.png", 3));
     std::vector<std::unique_ptr<Enemy>> enemies;
     enemies = spawnNewWave(registry);
-
     while (myWindow.isOpen()) {
         events(myWindow, enemies, player);
         if (player) {
@@ -133,7 +145,6 @@ int main() {
                 }
             }
         }
-
         if (player->hp > 0)
             player->draw(myWindow.window);
 

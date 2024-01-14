@@ -14,8 +14,23 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add the executable target
-# add_executable(R-TypeServer ./Server/src/Server.cpp ./Server/src/Parser.cpp ./Server/include/Parser.hpp ./Server/include/Server.hpp ./Engine/Network/Network.hpp ./Engine/Network/NLib.hpp)
-# add_executable()
-add_executable(R-TypeCommon ./Client/src/main.cpp ./Client/src/Input.cpp ./Client/src/Missile.cpp ./Client/include/Sprite.hpp ./Client/include/Components.hpp ./Client/include/Input.hpp ./Client/include/Sound.hpp ./Client/include/IGraphics.hpp ./Client/include/Missile.hpp ./Client/include/HitBox.hpp ./Client/src/HitBox.cpp ./Client/include/Enemy.hpp ./Client/src/Enemy.cpp ./Client/include/Player.hpp ./Client/src/Player.cpp)
+add_executable(R-TypeServer ./Server/src/main.cpp ./Server/src/playerData.cpp ./Server/include/playerData.hpp)
+# add_executable(R-TypeClient ./Client/src/RTypeClientTest.cpp)
+add_executable(R-TypeCommon ./Client/src/RTypeClientTest.cpp ./Client/src/main.cpp ./Client/src/Input.cpp ./Client/src/Missile.cpp ./Client/include/Sprite.hpp ./Client/include/Components.hpp ./Client/include/Input.hpp ./Client/include/Sound.hpp ./Client/include/IGraphics.hpp ./Client/include/Missile.hpp)
 
-target_link_libraries(R-TypeCommon sfml-graphics sfml-audio)
+target_link_libraries(R-TypeCommon
+    sfml-graphics sfml-audio
+    ${Boost_LIBRARIES}
+    pthread
+)
+
+
+target_link_libraries(R-TypeServer
+    ${Boost_LIBRARIES}
+    pthread
+)
+
+# target_link_libraries(R-TypeClient
+#     ${Boost_LIBRARIES}
+#     pthread
+# )

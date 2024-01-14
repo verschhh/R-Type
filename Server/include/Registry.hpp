@@ -27,6 +27,12 @@ class Registry
         virtual ~Registry() = default;
 
 
+        /**
+         * @brief Add a component to the Sparse Array
+         *
+         * @tparam Component
+         * @return Sparse_array<Component>& Return update Sparse_Array
+         */
         template <class Component>
         Sparse_array<Component> &register_component()
         {
@@ -39,6 +45,12 @@ class Registry
             return std::any_cast<Sparse_array<Component>&>(componentArray);
         };
 
+        /**
+         * @brief Get the Sparse Array according to the chosen Component
+         *
+         * @tparam Component
+         * @return Sparse_array<Component>& Return update Sparse_Array
+         */
         template <class Component>
         Sparse_array<Component> &get_components()
         {
@@ -50,6 +62,12 @@ class Registry
             return std::any_cast<Sparse_array<Component> &>(it->second);
         }
 
+        /**
+         * @brief Get the const Sparse Array according to the chosen Component
+         *
+         * @tparam Component
+         * @return Sparse_array<Component> const& Return update const Sparse_Array
+         */
         template <class Component>
         Sparse_array<Component> const &get_components() const
         {
@@ -61,6 +79,11 @@ class Registry
             return std::any_cast<Sparse_array<Component> &>(it->second);
         };
 
+        /**
+         * @brief Create a Entity
+         *
+         * @return Entity
+         */
         Entity spawn_entity()
         {
             _nbEntities += 1;
@@ -68,7 +91,14 @@ class Registry
             return Entity(_nbEntities - 1);
         };
 
-         Entity entity_from_index(std::size_t idx) const
+
+        /**
+         * @brief Get a specific Entity according to given index
+         *
+         * @param idx
+         * @return Entity Entity at position idx
+         */
+        Entity entity_from_index(std::size_t idx) const
         {
             if (idx >= _nbEntities) {
                 throw std::out_of_range("Entity doesn't exist");
@@ -76,12 +106,25 @@ class Registry
             return Entity(idx);
         };
 
+        /**
+         * @brief Erase a entity
+         *
+         * @param e entity
+         */
         void kill_entity(Entity const &e)
         {
             for (auto &&it : _erasers)
                 it(*this, e);
         };
 
+        /**
+         * @brief Add a Component to an Entity
+         * 
+         * @tparam Component Choosen Component (ex: Position)
+         * @param e Entity
+         * @param c Component
+         * @return Sparse_array<Component>::reference_type Sparse Array update with Component apply to Entity
+         */
         template <typename Component>
         typename Sparse_array<Component>::reference_type add_component(Entity const &e, Component &&c)
         {
@@ -106,6 +149,13 @@ class Registry
             return sparseArray.emplaceAt(to, p...);
         };
 
+
+        /**
+         * @brief Remove a Component from a Entity
+         *
+         * @tparam Component
+         * @param from Entity
+         */
         template <typename Component>
         void remove_component(Entity const &from)
         {

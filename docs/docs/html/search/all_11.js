@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['scalex_109',['scaleX',['../structCSprite.html#a111b31cfce11a133281b79dd59a567a1',1,'CSprite']]],
+  ['scaley_110',['scaleY',['../structCSprite.html#ab4be987c31604833bf1fbda3e0640f96',1,'CSprite']]],
+  ['send_5fmessage_111',['send_message',['../RTypeClientTest_8cpp.html#a7a1ecf1ab0702ab69f13822503f5109d',1,'RTypeClientTest.cpp']]],
+  ['setbuffer_112',['setBuffer',['../classSound.html#ab9dbc91773dcb42c2ee044beca3f603d',1,'Sound']]],
+  ['setposition_113',['setPosition',['../classSpriteManager.html#abaa52af4cfde17ad4e7898b8aaaa4365',1,'SpriteManager']]],
+  ['setscale_114',['setScale',['../classSpriteManager.html#a7933be805fbd8cb6b35c1996d35b18c3',1,'SpriteManager']]],
+  ['settexture_115',['setTexture',['../classSpriteManager.html#a415e014334af5f85739fcdc4e9906e6d',1,'SpriteManager']]],
+  ['setvolumemusic_116',['setVolumeMusic',['../classSound.html#aeba58919cfd5915e18161e523f36a20f',1,'Sound']]],
+  ['setvolumesound_117',['setVolumeSound',['../classSound.html#a11a223511158a363273d1c846b7369ff',1,'Sound']]],
+  ['sfmlwindow_118',['SfmlWindow',['../classSfmlWindow.html',1,'SfmlWindow'],['../classSfmlWindow.html#a7c3b44d5383e22bdbe74e83bdc711a0c',1,'SfmlWindow::SfmlWindow()']]],
+  ['shape_119',['shape',['../classMissile.html#a0ac8ce2b4696648257e0493baa31889f',1,'Missile']]],
+  ['size_120',['size',['../classSparse__array.html#a54977ad2d5432251a41151b0c88ed394',1,'Sparse_array']]],
+  ['size_5ftype_121',['size_type',['../classSparse__array.html#a5302d3b4d7c2c62ae8283c6fee07681b',1,'Sparse_array']]],
+  ['sound_122',['Sound',['../classSound.html',1,'Sound'],['../classSound.html#ac35edfc6f2ddbb2bf27d8d3c1deac415',1,'Sound::Sound()=default']]],
+  ['sound_123',['sound',['../classSound.html#a01cae9c1e9ce7c03897b5eba83b314e8',1,'Sound']]],
+  ['sound_2ehpp_124',['Sound.hpp',['../Sound_8hpp.html',1,'']]],
+  ['sparse_2ehpp_125',['Sparse.hpp',['../Sparse_8hpp.html',1,'']]],
+  ['sparse_5farray_126',['Sparse_array',['../classSparse__array.html',1,'Sparse_array&lt; Component &gt;'],['../classSparse__array.html#a206ce44ba5440eb74b2507ccf2a7333a',1,'Sparse_array::Sparse_array()=default'],['../classSparse__array.html#aa6e9383ac0b873ef28a967c4e772cff9',1,'Sparse_array::Sparse_array(const Sparse_array &amp;other)'],['../classSparse__array.html#a3fc1879ed21de6ee7d766eb122d337f7',1,'Sparse_array::Sparse_array(Sparse_array &amp;&amp;sp_arr) noexcept']]],
+  ['spawn_5fentity_127',['spawn_entity',['../classRegistry.html#a3d6e1501dab60caa62a8511245f0b0b3',1,'Registry']]],
+  ['sprite_2ehpp_128',['Sprite.hpp',['../Sprite_8hpp.html',1,'']]],
+  ['spritemanager_129',['SpriteManager',['../classSpriteManager.html',1,'SpriteManager'],['../classSpriteManager.html#aaded6a6cdc9a6a75490f3f552359caff',1,'SpriteManager::SpriteManager()=default']]],
+  ['sprites_130',['sprites',['../classSpriteManager.html#a2c5e7cb3add33f56de37fd699b189a24',1,'SpriteManager']]]
+];

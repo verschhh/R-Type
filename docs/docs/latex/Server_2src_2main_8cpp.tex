@@ -1,0 +1,55 @@
+\hypertarget{Server_2src_2main_8cpp}{}\doxysection{/home/maxime/\+Troisième/\+R-\/\+Type/\+Server/src/main.cpp File Reference}
+\label{Server_2src_2main_8cpp}\index{/home/maxime/Troisième/R-\/Type/Server/src/main.cpp@{/home/maxime/Troisième/R-\/Type/Server/src/main.cpp}}
+{\ttfamily \#include $<$boost/asio.\+hpp$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include \char`\"{}../include/player\+Data.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::asio\+::ip\+::address \mbox{\hyperlink{Server_2src_2main_8cpp_a5b31d0936584ee0d3fe4bdc77e22e02d}{get\+Ip}} ()
+\begin{DoxyCompactList}\small\item\em Get the Ip of user. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Server_2src_2main_8cpp_af3dc0b451ef3c1b80c6c5cc871b31396}{handle\+\_\+connection}} (boost\+::asio\+::ip\+::tcp\+::socket \&socket)
+\begin{DoxyCompactList}\small\item\em Allows Clients to connect to server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Server_2src_2main_8cpp_acdef7a1fd863a6d3770c1268cb06add3}{main}} ()
+\begin{DoxyCompactList}\small\item\em Server main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Server_2src_2main_8cpp_a5b31d0936584ee0d3fe4bdc77e22e02d}\label{Server_2src_2main_8cpp_a5b31d0936584ee0d3fe4bdc77e22e02d}} 
+\index{main.cpp@{main.cpp}!getIp@{getIp}}
+\index{getIp@{getIp}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getIp()}{getIp()}}
+{\footnotesize\ttfamily boost\+::asio\+::ip\+::address get\+Ip (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the Ip of user. 
+
+\begin{DoxyReturn}{Returns}
+boost\+::asio\+::ip\+::address Ip 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Server_2src_2main_8cpp_af3dc0b451ef3c1b80c6c5cc871b31396}\label{Server_2src_2main_8cpp_af3dc0b451ef3c1b80c6c5cc871b31396}} 
+\index{main.cpp@{main.cpp}!handle\_connection@{handle\_connection}}
+\index{handle\_connection@{handle\_connection}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{handle\_connection()}{handle\_connection()}}
+{\footnotesize\ttfamily void handle\+\_\+connection (\begin{DoxyParamCaption}\item[{boost\+::asio\+::ip\+::tcp\+::socket \&}]{socket }\end{DoxyParamCaption})}
+
+
+
+Allows Clients to connect to server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & Connection sockets \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Server_2src_2main_8cpp_acdef7a1fd863a6d3770c1268cb06add3}\label{Server_2src_2main_8cpp_acdef7a1fd863a6d3770c1268cb06add3}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily void main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Server main. 
+

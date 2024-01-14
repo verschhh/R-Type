@@ -30,6 +30,7 @@ class SfmlWindow {
     void display() { window.display(); };
     void draw(sf::Sprite sprite) { window.draw(sprite); };
     void drawShape(sf::RectangleShape shape) { window.draw(shape); };
+    void drawText(sf::Text text) { window.draw(text); };
     bool isClosedEvent(sf::Event& event) const { return event.type == sf::Event::Closed; };
 
     sf::Event event;

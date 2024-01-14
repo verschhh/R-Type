@@ -1,0 +1,177 @@
+\hypertarget{classUdpServer}{}\doxysection{Udp\+Server Class Reference}
+\label{classUdpServer}\index{UdpServer@{UdpServer}}
+
+
+{\ttfamily \#include $<$Udp\+Server.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUdpServer_a326b345d09940646209cc0707328df76}{Udp\+Server}} (boost\+::asio\+::io\+\_\+service \&io\+\_\+service)
+\begin{DoxyCompactList}\small\item\em the class that handle the server side of the project \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classUdpServer_aef1871384fbc46ef425242be4474af3a}{$\sim$\+Udp\+Server}} ()
+\item 
+void \mbox{\hyperlink{classUdpServer_a47c45e457b49d0baa2c6c3c5aa5a4e37}{Udp\+Receive}} ()
+\item 
+void \mbox{\hyperlink{classUdpServer_ab64472ef4fa1a1c8f48e7a0eb87e073c}{Udp\+Send\+Back}} ()
+\item 
+boost\+::asio\+::ip\+::udp\+::endpoint \mbox{\hyperlink{classUdpServer_af5f2a4eddf5c7ff4a1d42e71fae9ae3d}{get\+Sender\+Endpoint}} () const
+\item 
+char $\ast$ \mbox{\hyperlink{classUdpServer_a31ea88bce19b52f6fac6f395d9d1e9dd}{get\+Data}} ()
+\item 
+boost\+::asio\+::ip\+::udp\+::socket \& \mbox{\hyperlink{classUdpServer_a979ec45f4042214df096aada546e78b5}{get\+Socket}} ()
+\item 
+char $\ast$ \mbox{\hyperlink{classUdpServer_a17d8ca752ff20fe637a83d57e88b054f}{write\+Data}} (const char $\ast$data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classUdpServer_a57d3cc100a613582418b80aecd64b35daa344f403cf8279ea27cc32ce2e6a2bcb}{max\+\_\+length}} = 1024
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::asio\+::ip\+::udp\+::socket \mbox{\hyperlink{classUdpServer_a5570b79420d583354a70aaad23b01cb8}{socket\+\_\+}}
+\item 
+boost\+::asio\+::ip\+::udp\+::endpoint \mbox{\hyperlink{classUdpServer_ab5633b39b2b37c487552d052d95e5bf7}{sender\+\_\+endpoint\+\_\+}}
+\item 
+int \mbox{\hyperlink{classUdpServer_a0801936ace6b33ddea7f1fb36c53007f}{lport\+\_\+}}
+\item 
+int \mbox{\hyperlink{classUdpServer_ae8718b450ef83bc3a2adb2b79e704947}{sport\+\_\+}}
+\item 
+char \mbox{\hyperlink{classUdpServer_a0000d1278a46c1f34d39136f4e031bfe}{data\+\_\+}} \mbox{[}\mbox{\hyperlink{classUdpServer_a57d3cc100a613582418b80aecd64b35daa344f403cf8279ea27cc32ce2e6a2bcb}{max\+\_\+length}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classUdpServer_a57d3cc100a613582418b80aecd64b35d}\label{classUdpServer_a57d3cc100a613582418b80aecd64b35d}} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{max\_length@{max\_length}!UdpServer@{UdpServer}}\index{UdpServer@{UdpServer}!max\_length@{max\_length}}}\mbox{\Hypertarget{classUdpServer_a57d3cc100a613582418b80aecd64b35daa344f403cf8279ea27cc32ce2e6a2bcb}\label{classUdpServer_a57d3cc100a613582418b80aecd64b35daa344f403cf8279ea27cc32ce2e6a2bcb}} 
+max\+\_\+length&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classUdpServer_a326b345d09940646209cc0707328df76}\label{classUdpServer_a326b345d09940646209cc0707328df76}} 
+\index{UdpServer@{UdpServer}!UdpServer@{UdpServer}}
+\index{UdpServer@{UdpServer}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{UdpServer()}{UdpServer()}}
+{\footnotesize\ttfamily Udp\+Server\+::\+Udp\+Server (\begin{DoxyParamCaption}\item[{boost\+::asio\+::io\+\_\+service \&}]{io\+\_\+service }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+the class that handle the server side of the project 
+
+\mbox{\Hypertarget{classUdpServer_aef1871384fbc46ef425242be4474af3a}\label{classUdpServer_aef1871384fbc46ef425242be4474af3a}} 
+\index{UdpServer@{UdpServer}!````~UdpServer@{$\sim$UdpServer}}
+\index{````~UdpServer@{$\sim$UdpServer}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{$\sim$UdpServer()}{~UdpServer()}}
+{\footnotesize\ttfamily Udp\+Server\+::$\sim$\+Udp\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classUdpServer_a31ea88bce19b52f6fac6f395d9d1e9dd}\label{classUdpServer_a31ea88bce19b52f6fac6f395d9d1e9dd}} 
+\index{UdpServer@{UdpServer}!getData@{getData}}
+\index{getData@{getData}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily char $\ast$ Udp\+Server\+::get\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+a getter for the data \begin{DoxyReturn}{Returns}
+the data
+\end{DoxyReturn}
+\mbox{\Hypertarget{classUdpServer_af5f2a4eddf5c7ff4a1d42e71fae9ae3d}\label{classUdpServer_af5f2a4eddf5c7ff4a1d42e71fae9ae3d}} 
+\index{UdpServer@{UdpServer}!getSenderEndpoint@{getSenderEndpoint}}
+\index{getSenderEndpoint@{getSenderEndpoint}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{getSenderEndpoint()}{getSenderEndpoint()}}
+{\footnotesize\ttfamily boost\+::asio\+::ip\+::udp\+::endpoint Udp\+Server\+::get\+Sender\+Endpoint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+a getter for the sender endpoint \begin{DoxyReturn}{Returns}
+the sender endpoint
+\end{DoxyReturn}
+\mbox{\Hypertarget{classUdpServer_a979ec45f4042214df096aada546e78b5}\label{classUdpServer_a979ec45f4042214df096aada546e78b5}} 
+\index{UdpServer@{UdpServer}!getSocket@{getSocket}}
+\index{getSocket@{getSocket}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{getSocket()}{getSocket()}}
+{\footnotesize\ttfamily boost\+::asio\+::ip\+::udp\+::socket \& Udp\+Server\+::get\+Socket (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+a getter for the socket \begin{DoxyReturn}{Returns}
+the socket
+\end{DoxyReturn}
+\mbox{\Hypertarget{classUdpServer_a47c45e457b49d0baa2c6c3c5aa5a4e37}\label{classUdpServer_a47c45e457b49d0baa2c6c3c5aa5a4e37}} 
+\index{UdpServer@{UdpServer}!UdpReceive@{UdpReceive}}
+\index{UdpReceive@{UdpReceive}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{UdpReceive()}{UdpReceive()}}
+{\footnotesize\ttfamily void Udp\+Server\+::\+Udp\+Receive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+the function that receive the data in an asyn way from the client and send it back \begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\mbox{\Hypertarget{classUdpServer_ab64472ef4fa1a1c8f48e7a0eb87e073c}\label{classUdpServer_ab64472ef4fa1a1c8f48e7a0eb87e073c}} 
+\index{UdpServer@{UdpServer}!UdpSendBack@{UdpSendBack}}
+\index{UdpSendBack@{UdpSendBack}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{UdpSendBack()}{UdpSendBack()}}
+{\footnotesize\ttfamily void Udp\+Server\+::\+Udp\+Send\+Back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+the function that send back the data to the client \begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\mbox{\Hypertarget{classUdpServer_a17d8ca752ff20fe637a83d57e88b054f}\label{classUdpServer_a17d8ca752ff20fe637a83d57e88b054f}} 
+\index{UdpServer@{UdpServer}!writeData@{writeData}}
+\index{writeData@{writeData}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{writeData()}{writeData()}}
+{\footnotesize\ttfamily char $\ast$ Udp\+Server\+::write\+Data (\begin{DoxyParamCaption}\item[{const char $\ast$}]{data }\end{DoxyParamCaption})}
+
+a setter for the data 
+\begin{DoxyParams}{Parameters}
+{\em data} & the data to set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the data
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classUdpServer_a0000d1278a46c1f34d39136f4e031bfe}\label{classUdpServer_a0000d1278a46c1f34d39136f4e031bfe}} 
+\index{UdpServer@{UdpServer}!data\_@{data\_}}
+\index{data\_@{data\_}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily char Udp\+Server\+::data\+\_\+\mbox{[}\mbox{\hyperlink{classUdpServer_a57d3cc100a613582418b80aecd64b35daa344f403cf8279ea27cc32ce2e6a2bcb}{max\+\_\+length}}\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUdpServer_a0801936ace6b33ddea7f1fb36c53007f}\label{classUdpServer_a0801936ace6b33ddea7f1fb36c53007f}} 
+\index{UdpServer@{UdpServer}!lport\_@{lport\_}}
+\index{lport\_@{lport\_}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{lport\_}{lport\_}}
+{\footnotesize\ttfamily int Udp\+Server\+::lport\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUdpServer_ab5633b39b2b37c487552d052d95e5bf7}\label{classUdpServer_ab5633b39b2b37c487552d052d95e5bf7}} 
+\index{UdpServer@{UdpServer}!sender\_endpoint\_@{sender\_endpoint\_}}
+\index{sender\_endpoint\_@{sender\_endpoint\_}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{sender\_endpoint\_}{sender\_endpoint\_}}
+{\footnotesize\ttfamily boost\+::asio\+::ip\+::udp\+::endpoint Udp\+Server\+::sender\+\_\+endpoint\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUdpServer_a5570b79420d583354a70aaad23b01cb8}\label{classUdpServer_a5570b79420d583354a70aaad23b01cb8}} 
+\index{UdpServer@{UdpServer}!socket\_@{socket\_}}
+\index{socket\_@{socket\_}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{socket\_}{socket\_}}
+{\footnotesize\ttfamily boost\+::asio\+::ip\+::udp\+::socket Udp\+Server\+::socket\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUdpServer_ae8718b450ef83bc3a2adb2b79e704947}\label{classUdpServer_ae8718b450ef83bc3a2adb2b79e704947}} 
+\index{UdpServer@{UdpServer}!sport\_@{sport\_}}
+\index{sport\_@{sport\_}!UdpServer@{UdpServer}}
+\doxysubsubsection{\texorpdfstring{sport\_}{sport\_}}
+{\footnotesize\ttfamily int Udp\+Server\+::sport\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/maxime/\+Troisième/\+R-\/\+Type/\+Server/include/\mbox{\hyperlink{UdpServer_8hpp}{Udp\+Server.\+hpp}}\item 
+/home/maxime/\+Troisième/\+R-\/\+Type/\+Server/src/\mbox{\hyperlink{UdpServer_8cpp}{Udp\+Server.\+cpp}}\end{DoxyCompactItemize}

@@ -42,9 +42,13 @@ CMakePresets.json
 CMakeFiles
 .vscode/settings.json
 
+vcpkg
+vcpkg_installed
+
 *.cmake
 R-TypeClient
 R-TypeServer
+R-TypeCommon
 
 # do not ignore the following files
 !README.md

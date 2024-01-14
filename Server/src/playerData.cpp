@@ -9,9 +9,20 @@
 
 int Player::nextId = 1;
 
+/**
+ * @brief Construct a new Player:: Player object
+ *
+ */
+
 Player::Player() {
     id = nextId++;
 }
+
+/**
+ * @brief Get the private variable "id"
+ *
+ * @return int Id of player
+ */
 
 int Player::getPlayerId() {
     return this->id;

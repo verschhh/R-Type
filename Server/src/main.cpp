@@ -9,6 +9,12 @@
 #include <iostream>
 #include "../include/playerData.hpp"
 
+/**
+ * @brief Get the Ip of user
+ *
+ * @return boost::asio::ip::address Ip
+ */
+
 boost::asio::ip::address getIp()
 {
     try {
@@ -25,6 +31,12 @@ boost::asio::ip::address getIp()
         std::cerr << e.what() << std::endl;
     }
 }
+
+/**
+ * @brief Allows Clients to connect to server
+ *
+ * @param socket Connection sockets
+ */
 
 void handle_connection(boost::asio::ip::tcp::socket& socket) {
     try {
@@ -53,7 +65,13 @@ void handle_connection(boost::asio::ip::tcp::socket& socket) {
     }
 }
 
-int main() {
+/**
+ * @brief Server main
+ *
+ *
+ */
+
+void main() {
     try {
         boost::asio::io_service io_service;
         boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::tcp::v4(), 12345);
@@ -71,6 +89,4 @@ int main() {
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
-
-    return 0;
 }

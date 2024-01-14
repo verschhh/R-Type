@@ -54,3 +54,4 @@ R-TypeServer
 !build.sh
 !clean.sh
 !CMakeLists.txt
+!docs/Class.txt

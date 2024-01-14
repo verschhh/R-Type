@@ -11,6 +11,17 @@
     #include <SFML/Audio.hpp>
 
 class Sound {
+    /**
+     * @brief Sound class
+     * 
+     * This class is used to handle the sounds
+     * 
+     * @param music : the music
+     * @param buffer : the buffer
+     * @param sound : the sound
+     * 
+     * @return nothing
+     */
     public:
 
     Sound() = default;

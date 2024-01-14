@@ -1,0 +1,102 @@
+\hypertarget{classMissile}{}\doxysection{Missile Class Reference}
+\label{classMissile}\index{Missile@{Missile}}
+
+
+{\ttfamily \#include $<$Missile.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMissile_a12a03296b15b30c8deb9437c796b5b89}{Missile}} (float width, float height, float speed, sf\+::\+Color color, sf\+::\+Vector2f initial\+Direction)
+\item 
+void \mbox{\hyperlink{classMissile_a23605d8e69d911295f2ed4bd254604d6}{update}} (float delta\+Time, float x, float y)
+\item 
+void \mbox{\hyperlink{classMissile_aa3d4a1a39fa2e3df1eebb40935668e4b}{draw}} (sf\+::\+Render\+Window \&window)
+\item 
+void \mbox{\hyperlink{classMissile_a3f026ecbad49e8d9982857c0dad75213}{launch}} (float x, float y, sf\+::\+Vector2f direction)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Rectangle\+Shape \mbox{\hyperlink{classMissile_a0ac8ce2b4696648257e0493baa31889f}{shape}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Clock \mbox{\hyperlink{classMissile_a56e428688342d977bf5b7b4c32f5fee9}{cooldown}}
+\item 
+float \mbox{\hyperlink{classMissile_a3ff03c57d43f398f5d98aeb9b9afaff7}{launch\+Cooldown}}
+\item 
+float \mbox{\hyperlink{classMissile_a786ea6810464830b4c3b180a2d4b3f0d}{missile\+Speed}}
+\item 
+sf\+::\+Vector2f \mbox{\hyperlink{classMissile_aacc0c73b90dc4312ccbe80fc830686bc}{missile\+Direction}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMissile_a12a03296b15b30c8deb9437c796b5b89}\label{classMissile_a12a03296b15b30c8deb9437c796b5b89}} 
+\index{Missile@{Missile}!Missile@{Missile}}
+\index{Missile@{Missile}!Missile@{Missile}}
+\doxysubsubsection{\texorpdfstring{Missile()}{Missile()}}
+{\footnotesize\ttfamily Missile\+::\+Missile (\begin{DoxyParamCaption}\item[{float}]{width,  }\item[{float}]{height,  }\item[{float}]{speed,  }\item[{sf\+::\+Color}]{color,  }\item[{sf\+::\+Vector2f}]{initial\+Direction }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMissile_aa3d4a1a39fa2e3df1eebb40935668e4b}\label{classMissile_aa3d4a1a39fa2e3df1eebb40935668e4b}} 
+\index{Missile@{Missile}!draw@{draw}}
+\index{draw@{draw}!Missile@{Missile}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Missile\+::draw (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMissile_a3f026ecbad49e8d9982857c0dad75213}\label{classMissile_a3f026ecbad49e8d9982857c0dad75213}} 
+\index{Missile@{Missile}!launch@{launch}}
+\index{launch@{launch}!Missile@{Missile}}
+\doxysubsubsection{\texorpdfstring{launch()}{launch()}}
+{\footnotesize\ttfamily void Missile\+::launch (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{sf\+::\+Vector2f}]{direction }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMissile_a23605d8e69d911295f2ed4bd254604d6}\label{classMissile_a23605d8e69d911295f2ed4bd254604d6}} 
+\index{Missile@{Missile}!update@{update}}
+\index{update@{update}!Missile@{Missile}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Missile\+::update (\begin{DoxyParamCaption}\item[{float}]{delta\+Time,  }\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classMissile_a56e428688342d977bf5b7b4c32f5fee9}\label{classMissile_a56e428688342d977bf5b7b4c32f5fee9}} 
+\index{Missile@{Missile}!cooldown@{cooldown}}
+\index{cooldown@{cooldown}!Missile@{Missile}}
+\doxysubsubsection{\texorpdfstring{cooldown}{cooldown}}
+{\footnotesize\ttfamily sf\+::\+Clock Missile\+::cooldown\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMissile_a3ff03c57d43f398f5d98aeb9b9afaff7}\label{classMissile_a3ff03c57d43f398f5d98aeb9b9afaff7}} 
+\index{Missile@{Missile}!launchCooldown@{launchCooldown}}
+\index{launchCooldown@{launchCooldown}!Missile@{Missile}}
+\doxysubsubsection{\texorpdfstring{launchCooldown}{launchCooldown}}
+{\footnotesize\ttfamily float Missile\+::launch\+Cooldown\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMissile_aacc0c73b90dc4312ccbe80fc830686bc}\label{classMissile_aacc0c73b90dc4312ccbe80fc830686bc}} 
+\index{Missile@{Missile}!missileDirection@{missileDirection}}
+\index{missileDirection@{missileDirection}!Missile@{Missile}}
+\doxysubsubsection{\texorpdfstring{missileDirection}{missileDirection}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Missile\+::missile\+Direction\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMissile_a786ea6810464830b4c3b180a2d4b3f0d}\label{classMissile_a786ea6810464830b4c3b180a2d4b3f0d}} 
+\index{Missile@{Missile}!missileSpeed@{missileSpeed}}
+\index{missileSpeed@{missileSpeed}!Missile@{Missile}}
+\doxysubsubsection{\texorpdfstring{missileSpeed}{missileSpeed}}
+{\footnotesize\ttfamily float Missile\+::missile\+Speed\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMissile_a0ac8ce2b4696648257e0493baa31889f}\label{classMissile_a0ac8ce2b4696648257e0493baa31889f}} 
+\index{Missile@{Missile}!shape@{shape}}
+\index{shape@{shape}!Missile@{Missile}}
+\doxysubsubsection{\texorpdfstring{shape}{shape}}
+{\footnotesize\ttfamily sf\+::\+Rectangle\+Shape Missile\+::shape}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/maxime/\+Troisième/\+R-\/\+Type/\+Client/include/\mbox{\hyperlink{Missile_8hpp}{Missile.\+hpp}}\item 
+/home/maxime/\+Troisième/\+R-\/\+Type/\+Client/src/\mbox{\hyperlink{Missile_8cpp}{Missile.\+cpp}}\end{DoxyCompactItemize}

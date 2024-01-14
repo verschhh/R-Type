@@ -1,0 +1,138 @@
+\hypertarget{classSound}{}\doxysection{Sound Class Reference}
+\label{classSound}\index{Sound@{Sound}}
+
+
+{\ttfamily \#include $<$Sound.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSound_ac35edfc6f2ddbb2bf27d8d3c1deac415}{Sound}} ()=default
+\item 
+bool \mbox{\hyperlink{classSound_a375618648e413547ce1fc3cf7e5f6750}{load\+From\+File\+Music}} (std\+::string file)
+\item 
+bool \mbox{\hyperlink{classSound_abc5a5c6eb8d2874452d8bfc47d1d15bd}{load\+From\+File\+Sound}} (std\+::string file)
+\item 
+void \mbox{\hyperlink{classSound_a1a5b58fefce795f7475532736e06d63f}{play\+Music}} ()
+\item 
+void \mbox{\hyperlink{classSound_a60458a190bb419b431541a778644f100}{music\+Loop}} (bool loop)
+\item 
+void \mbox{\hyperlink{classSound_ab9dbc91773dcb42c2ee044beca3f603d}{set\+Buffer}} ()
+\item 
+void \mbox{\hyperlink{classSound_a3ce5b74dc968ccf49b06fe1bbb22b68f}{play\+Sound}} ()
+\item 
+void \mbox{\hyperlink{classSound_a11a223511158a363273d1c846b7369ff}{set\+Volume\+Sound}} (int volume)
+\item 
+void \mbox{\hyperlink{classSound_aeba58919cfd5915e18161e523f36a20f}{set\+Volume\+Music}} (int volume)
+\item 
+void \mbox{\hyperlink{classSound_aeaf2c91aca99ca437df1cdc933f586f6}{modify\+Volume\+Sound}} (int volume)
+\item 
+void \mbox{\hyperlink{classSound_a044d3745434e227598dfc34e1b2bb181}{modify\+Volume\+Music}} (int volume)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Music \mbox{\hyperlink{classSound_a1980d7cce05d910711a843708084fedc}{music}}
+\item 
+sf\+::\+Sound\+Buffer \mbox{\hyperlink{classSound_a98783abfbc6344ce4160228714e53232}{buffer}}
+\item 
+sf\+::\+Sound \mbox{\hyperlink{classSound_a01cae9c1e9ce7c03897b5eba83b314e8}{sound}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSound_ac35edfc6f2ddbb2bf27d8d3c1deac415}\label{classSound_ac35edfc6f2ddbb2bf27d8d3c1deac415}} 
+\index{Sound@{Sound}!Sound@{Sound}}
+\index{Sound@{Sound}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{Sound()}{Sound()}}
+{\footnotesize\ttfamily Sound\+::\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSound_a375618648e413547ce1fc3cf7e5f6750}\label{classSound_a375618648e413547ce1fc3cf7e5f6750}} 
+\index{Sound@{Sound}!loadFromFileMusic@{loadFromFileMusic}}
+\index{loadFromFileMusic@{loadFromFileMusic}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{loadFromFileMusic()}{loadFromFileMusic()}}
+{\footnotesize\ttfamily bool Sound\+::load\+From\+File\+Music (\begin{DoxyParamCaption}\item[{std\+::string}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSound_abc5a5c6eb8d2874452d8bfc47d1d15bd}\label{classSound_abc5a5c6eb8d2874452d8bfc47d1d15bd}} 
+\index{Sound@{Sound}!loadFromFileSound@{loadFromFileSound}}
+\index{loadFromFileSound@{loadFromFileSound}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{loadFromFileSound()}{loadFromFileSound()}}
+{\footnotesize\ttfamily bool Sound\+::load\+From\+File\+Sound (\begin{DoxyParamCaption}\item[{std\+::string}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSound_a044d3745434e227598dfc34e1b2bb181}\label{classSound_a044d3745434e227598dfc34e1b2bb181}} 
+\index{Sound@{Sound}!modifyVolumeMusic@{modifyVolumeMusic}}
+\index{modifyVolumeMusic@{modifyVolumeMusic}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{modifyVolumeMusic()}{modifyVolumeMusic()}}
+{\footnotesize\ttfamily void Sound\+::modify\+Volume\+Music (\begin{DoxyParamCaption}\item[{int}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSound_aeaf2c91aca99ca437df1cdc933f586f6}\label{classSound_aeaf2c91aca99ca437df1cdc933f586f6}} 
+\index{Sound@{Sound}!modifyVolumeSound@{modifyVolumeSound}}
+\index{modifyVolumeSound@{modifyVolumeSound}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{modifyVolumeSound()}{modifyVolumeSound()}}
+{\footnotesize\ttfamily void Sound\+::modify\+Volume\+Sound (\begin{DoxyParamCaption}\item[{int}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSound_a60458a190bb419b431541a778644f100}\label{classSound_a60458a190bb419b431541a778644f100}} 
+\index{Sound@{Sound}!musicLoop@{musicLoop}}
+\index{musicLoop@{musicLoop}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{musicLoop()}{musicLoop()}}
+{\footnotesize\ttfamily void Sound\+::music\+Loop (\begin{DoxyParamCaption}\item[{bool}]{loop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSound_a1a5b58fefce795f7475532736e06d63f}\label{classSound_a1a5b58fefce795f7475532736e06d63f}} 
+\index{Sound@{Sound}!playMusic@{playMusic}}
+\index{playMusic@{playMusic}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{playMusic()}{playMusic()}}
+{\footnotesize\ttfamily void Sound\+::play\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSound_a3ce5b74dc968ccf49b06fe1bbb22b68f}\label{classSound_a3ce5b74dc968ccf49b06fe1bbb22b68f}} 
+\index{Sound@{Sound}!playSound@{playSound}}
+\index{playSound@{playSound}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{playSound()}{playSound()}}
+{\footnotesize\ttfamily void Sound\+::play\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSound_ab9dbc91773dcb42c2ee044beca3f603d}\label{classSound_ab9dbc91773dcb42c2ee044beca3f603d}} 
+\index{Sound@{Sound}!setBuffer@{setBuffer}}
+\index{setBuffer@{setBuffer}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{setBuffer()}{setBuffer()}}
+{\footnotesize\ttfamily void Sound\+::set\+Buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSound_aeba58919cfd5915e18161e523f36a20f}\label{classSound_aeba58919cfd5915e18161e523f36a20f}} 
+\index{Sound@{Sound}!setVolumeMusic@{setVolumeMusic}}
+\index{setVolumeMusic@{setVolumeMusic}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{setVolumeMusic()}{setVolumeMusic()}}
+{\footnotesize\ttfamily void Sound\+::set\+Volume\+Music (\begin{DoxyParamCaption}\item[{int}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classSound_a11a223511158a363273d1c846b7369ff}\label{classSound_a11a223511158a363273d1c846b7369ff}} 
+\index{Sound@{Sound}!setVolumeSound@{setVolumeSound}}
+\index{setVolumeSound@{setVolumeSound}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{setVolumeSound()}{setVolumeSound()}}
+{\footnotesize\ttfamily void Sound\+::set\+Volume\+Sound (\begin{DoxyParamCaption}\item[{int}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSound_a98783abfbc6344ce4160228714e53232}\label{classSound_a98783abfbc6344ce4160228714e53232}} 
+\index{Sound@{Sound}!buffer@{buffer}}
+\index{buffer@{buffer}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily sf\+::\+Sound\+Buffer Sound\+::buffer\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSound_a1980d7cce05d910711a843708084fedc}\label{classSound_a1980d7cce05d910711a843708084fedc}} 
+\index{Sound@{Sound}!music@{music}}
+\index{music@{music}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{music}{music}}
+{\footnotesize\ttfamily sf\+::\+Music Sound\+::music\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSound_a01cae9c1e9ce7c03897b5eba83b314e8}\label{classSound_a01cae9c1e9ce7c03897b5eba83b314e8}} 
+\index{Sound@{Sound}!sound@{sound}}
+\index{sound@{sound}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{sound}{sound}}
+{\footnotesize\ttfamily sf\+::\+Sound Sound\+::sound\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/maxime/\+Troisième/\+R-\/\+Type/\+Client/include/\mbox{\hyperlink{Sound_8hpp}{Sound.\+hpp}}\end{DoxyCompactItemize}

@@ -1,77 +1,59 @@
-#include<iostream>
-#include<arpa/inet.h>
-#include<unistd.h>
-#include<sys/socket.h>
-#include<sys/types.h>
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-using namespace std;
+#include <boost/asio.hpp>
+#include <iostream>
+#include "../include/mainLoop.hpp"
 
-class udpSocket
-{
-public:
-    udpSocket( char * inServer, int inPort) : port(inPort), sByte(0), rByte(0) {
-        memset(bufferSend, '\0', sizeof(bufferSend)+1);
-        memset(bufferRecv, '\0', sizeof(bufferRecv)+1);
-        memset(server, '\0', sizeof(server)+1);
-        memcpy(server, inServer, strlen(inServer));
+// Define a handler for reading data from the server
+bool handle_read(boost::asio::ip::tcp::socket& socket) {
+    try {
+        boost::asio::streambuf buffer;
+        boost::asio::read_until(socket, buffer, '\n');
+        std::string message(boost::asio::buffers_begin(buffer.data()), boost::asio::buffers_end(buffer.data()));
+
+        std::cout << "Received from server: " << message;
+    } catch (std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+        return false;
+    }
+    return true;
+}
+
+void send_message(boost::asio::ip::tcp::socket& socket, const std::string& message) {
+    try {
+        // Send a message to the server
+        boost::asio::write(socket, boost::asio::buffer(message + "\n"));
+    } catch (std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
+}
+
+int main(int argc, char* argv[]) {
+    try {
+        if (argc != 3) {
+            std::cerr << "Usage: " << argv[0] << " <server_ip> <server_port>" << std::endl;
+            return 1;
+        }
+
+        boost::asio::io_service io_service;
+        boost::asio::ip::tcp::socket socket(io_service);
+        std::string serverIP = argv[1];
+        unsigned short serverPort = static_cast<unsigned short>(std::stoi(argv[2]));
+
+        boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string(serverIP), serverPort);
+
+        socket.connect(endpoint);
+
+        std::string initialMessage = "Hello, server!\n";
+        send_message(socket, "Hello, server!\n");
+
+        while (handle_read(socket)) {
+            if (!socket.is_open() || mainLoop() == -1) {
+                break;
+            }
+        }
+        socket.close();
+    } catch (std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
 
-    ssize_t sendRecv( char * inMsg) {
-        int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-        struct sockaddr_in servAddr;
-        struct sockaddr_in  cliAddr;
-        socklen_t cLen = sizeof(cliAddr);
-        socklen_t sLen = sizeof(servAddr);
-
-        servAddr.sin_family = AF_INET;
-        servAddr.sin_port = htons(port);
-        servAddr.sin_addr.s_addr = inet_addr(server);
-        memcpy(bufferSend, inMsg, strlen(inMsg));
-        sByte = sendto(sockfd,bufferSend,sizeof(bufferSend),0,(struct sockaddr * )&servAddr,sLen);
-        std::cout << "[" << sByte << "] Bytes Sent : " << std::endl;
-        rByte = recvfrom(sockfd,bufferRecv,sizeof(bufferRecv),0,(struct sockaddr *)&cliAddr,&cLen);
-        close(sockfd);
-        return sByte;
-    }
-
-    void  printMsg() {
-        std::cout << "[" << rByte << "] Bytes Rcvd : " << bufferRecv << std::endl;
-    }
-
-    char* getRecvMsg() {
-        return bufferRecv;
-    }
-
-    ssize_t getRecvBytes() {
-        return rByte;
-    }
-
-    ~udpSocket() {
-    }
-
-private:
-    int     port;
-    ssize_t sByte;
-    ssize_t rByte;
-    char    server[100];
-    char bufferSend[256];
-    char bufferRecv[256];
-};
-
-int main(int argc, char* argv[])
-{
-    if ( argc != 4 ) {
-        std::cout << "Usage:udp_client [server] [port] [Message]" << std::endl;
-        exit(-1);
-    }
-
-    udpSocket mUDP(argv[1], std::stoi(argv[2]));
-    if ( mUDP.sendRecv(argv[3]) > 0 ) {
-        // mUDP.printMsg();
-        std::cout << "[" << mUDP.getRecvBytes() << "] " << mUDP.getRecvMsg() << std::endl;
-    }
-
-    exit(0);
+    return 0;
 }

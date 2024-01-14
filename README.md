@@ -20,15 +20,29 @@ WIP
 
 ## 🚀 Usage
 
-Make sure you have [Conan](https://conan.io/) installed
+Make sure you have [Cmake](https://cmake.org/) installed
 
 Just run the following command at the root of your project and answer questions:
 
 ```sh
-conan install . --build=missing && ./build.sh 
+./build.sh
 ```
 
-And then run the different part of the project.
+And then run the different part of the project:
+
+<h2>Server: </h2>
+
+```sh
+./R-TypeServer
+```
+
+<h2>Client: </h2>
+
+```sh
+./R-TypeCommon <Id of server> <Port>
+```
+
+./R-TypeCommon &lt;Id of server&gt &lt;Port&gt
 
 ## Code Contributors
 

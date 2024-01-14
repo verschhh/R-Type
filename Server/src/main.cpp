@@ -2,47 +2,92 @@
 ** EPITECH PROJECT, 2023
 ** R-Type
 ** File description:
-** Server main
+** main.cpp
 */
 
+#include <boost/asio.hpp>
 #include <iostream>
-#include "../include/UdpServer.hpp"
+#include "../include/playerData.hpp"
 
-
-int InitServer(int port) {
 /**
- * @brief the function that initialize the server side of the project
- * @param port the port on which the server will listen
- * @return 0 if the server is correctly launched, -1 otherwise
+ * @brief Get the Ip of user
+ *
+ * @return boost::asio::ip::address Ip
  */
+
+boost::asio::ip::address getIp()
+{
     try {
-        boost::asio::io_service io_service;
-        UdpServer server(io_service, port);
-        io_service.run();
-    }
-    catch (std::exception& e) {
+        boost::asio::io_service netService;
+        boost::asio::ip::udp::resolver resolver(netService);
+        boost::asio::ip::udp::resolver::query query(boost::asio::ip::udp::v4(), "google.com", "");
+        boost::asio::ip::udp::resolver::iterator endpoints = resolver.resolve(query);
+        boost::asio::ip::udp::endpoint ep = *endpoints;
+        boost::asio::ip::udp::socket socket(netService);
+        socket.connect(ep);
+        boost::asio::ip::address addr = socket.local_endpoint().address();
+        return addr;
+    } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
-        return -1;
     }
-    return 0;
 }
 
-int main(int argc, char* argv[]) {
-    /**
-    * @brief the main function of the server and start the server side of the project
-    * @param argc the number of arguments
-    * @param argv the arguments
-    * @return 0 if the server is correctly launched, -1 otherwise
-    */
-    if ( argc != 2 ) {
-      std::cout << "usage: " << argv[0] << " <port>" << std::endl;
-      return -1;
+/**
+ * @brief Allows Clients to connect to server
+ *
+ * @param socket Connection sockets
+ */
+
+void handle_connection(boost::asio::ip::tcp::socket& socket) {
+    try {
+        boost::asio::streambuf buffer;
+
+        while (true) {
+            boost::asio::read_until(socket, buffer, '\n');
+            std::string message(boost::asio::buffers_begin(buffer.data()), boost::asio::buffers_end(buffer.data()));
+
+            std::cout << "Received from client: " << message;
+
+            Player myPlayer;
+            int id = myPlayer.getPlayerId();
+
+            std::string response = "Player: " + std::to_string(id);
+            boost::asio::write(socket, boost::asio::buffer(response + "\n"));
+
+            if (message == "bye\n") {
+                break;
+            }
+            buffer.consume(buffer.size());
+        }
+        socket.close();
+    } catch (std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
-    int port = std::stoi(argv[1]);
-    if (port <= 0 || port > 9999) {
-      std::cout << "usage: " << argv[0] << " <port>" << std::endl;
-      return -1;
+}
+
+/**
+ * @brief Server main
+ *
+ *
+ */
+
+int main() {
+    try {
+        boost::asio::io_service io_service;
+        boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::tcp::v4(), 12345);
+        boost::asio::ip::tcp::acceptor acceptor(io_service, endpoint);
+        boost::asio::ip::tcp::endpoint localEndpoint = acceptor.local_endpoint();
+
+        std::cout << "IP Address: " << getIp() << std::endl;
+        std::cout << "Port: " << localEndpoint.port() << std::endl;
+
+        while (true) {
+            boost::asio::ip::tcp::socket socket(io_service);
+            acceptor.accept(socket);
+            handle_connection(socket);
+        }
+    } catch (std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
-    InitServer(port);
     return 0;
 }

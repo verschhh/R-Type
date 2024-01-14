@@ -144,7 +144,7 @@ std::vector<std::unique_ptr<Enemy>> spawnNewWave(Registry &registry) {
         else if (random == 1)
             enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Ben.png", 1, x, y, 1));
         else
-            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Kentin.png", 1, x, y, 2));
+            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Kentin.png", 2, x, y, 2));
     }
     return enemies;
 }

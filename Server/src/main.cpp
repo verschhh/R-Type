@@ -29,6 +29,7 @@ boost::asio::ip::address getIp()
         return addr;
     } catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
+        return boost::asio::ip::address::from_string("error");
     }
 }
 

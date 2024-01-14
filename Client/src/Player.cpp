@@ -48,7 +48,6 @@ void Player::draw(sf::RenderWindow& window)
     window.draw(sprite.my_sprite);
     window.draw(hitbox.shape);
     missile.draw(window);
-    std::cout << missile.missiles.size() << std::endl;
 }
 
 Player::~Player()

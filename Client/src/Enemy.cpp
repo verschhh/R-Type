@@ -19,6 +19,7 @@ Enemy::Enemy(Registry *registry, std::string asset, int hp, float x, float y) : 
     this->hp = hp;
     this->x = x;
     this->y = y;
+    launchCooldown = 1;
 }
 
 int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {
@@ -33,14 +34,23 @@ int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {
 }
 
 void Enemy::update(float deltaTime, float x, float y) {
+    if (cooldown.getElapsedTime().asSeconds() >= launchCooldown) {
+        this->x -= 50;
+        if (this->y < 50)
+            this->y = 1000;
+        else
+            this->y -= 50;
+        cooldown.restart();
+    }
     hitbox.update(x, y);
     sprite.setPosition(x, y);
     missile.update(0.016f, x, y);
-    this->x = x;
-    this->y = y;
 }
 
 void Enemy::draw(sf::RenderWindow& window) {
+    cSprite.x = this->x;
+    cSprite.y = this->y;
+    update(0, cSprite.x, cSprite.y);
     window.draw(sprite.my_sprite);
     window.draw(hitbox.shape);
     missile.draw(window);

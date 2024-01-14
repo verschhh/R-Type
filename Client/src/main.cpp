@@ -79,27 +79,36 @@ int main() {
     Player player(&registry, "./Client/Assets/Image/rick.png", 3);
     std::vector<std::unique_ptr<Enemy>> enemies;
     for (int i = 0; i < 5; ++i) {
-        float x = 100.0f * (i + 1);
-        float y = 100.0f * (i + 1);
+        float x = 1920.0f + (100  * (i + 1));
+        float y = 0;
        enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Felix.png", 1, x, y));
     }
+    std::vector<std::unique_ptr<Enemy>> deadEnemies;
+
     while (myWindow.isOpen()) {
         events(myWindow);
         handleMouvement(&player.cSprite, player.input, &player.sprite);
-
 
         myWindow.clear();
         for (auto& enemy : enemies) {
             if (enemy && enemy->hp > 0) {
                 enemy->draw(myWindow.window);
-            } else {
+                if (player.missile.checkCollision({enemy->hitbox}) == true)
+                    enemy->hp -= 1;
+                if (enemy && enemy->hp > 0 && enemy->missile.checkCollision({player.hitbox}) == true)
+                    player.hp -= 1;
+            } else if (enemy && enemy->hp <= 0) {
+                enemy->cSprite.x = -1000; // Move the enemy off-screen
+                deadEnemies.push_back(std::move(enemy));
                 enemy.reset();
             }
-            if (enemy && player.missile.checkCollision({enemy->hitbox}) == true)
-                enemy->hp -= 1;
-            if (enemy && enemy->missile.checkCollision({player.hitbox}) == true)
-                player.hp -= 1;
         }
+
+        // Check if all enemies are dead
+        if (std::all_of(enemies.begin(), enemies.end(), [](const std::unique_ptr<Enemy>& enemy) { return enemy == nullptr; })) {
+            enemies.clear(); // Delete all enemies at once
+        }
+
         if (player.hp > 0)
             player.draw(myWindow.window);
         myWindow.display();

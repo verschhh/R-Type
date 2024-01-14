@@ -64,7 +64,8 @@ void move(sf::Sprite *sprite, const sf::Vector2f& velocity) {
 }
 
 
-GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleShape playButton, sf::RectangleShape quitButton) {
+GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleShape playButton, sf::RectangleShape quitButton,
+    sf::RectangleShape stopButton) {
     sf::Event event;
 
     while (myWindow.pollEvent(event)) {
@@ -74,7 +75,7 @@ GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleSha
         } else if (event.type == sf::Event::MouseButtonPressed) {
             sf::Vector2i mousePos = sf::Mouse::getPosition(myWindow.window);
             if (gameState == GameState::Playing) {
-                if (playButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+                if (stopButton.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                     return GameState::Paused;
                 }
             } else if (gameState == GameState::Paused) {
@@ -94,7 +95,7 @@ GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleSha
 int game(SfmlWindow &myWindow) {
     Missile missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(1.0f, 0.0f));
     Registry registry;
-    SpriteManager sprite[4];
+    SpriteManager sprite[5];
 
     registry.register_component<CSprite>();
     registry.register_component<Input>();
@@ -104,6 +105,7 @@ int game(SfmlWindow &myWindow) {
     CSprite backgound = {0.0, 0.0, 1, 1, "./Client/Assets/Image/star.jpg"};
     CSprite planet = {200.0, 100.0, 0.2, 0.2, "./Client/Assets/Image/planets.png"};
     CSprite paul = {400.0, 1010, 1, 1, "./Client/Assets/Image/paul.png"};
+    CSprite littlePlanet{600.0, 754, 0.1, 0.1, "./Client/Assets/Image/planets.png"};
     Input input;
 
     registry.add_component(rick, std::move(initialRick));
@@ -119,21 +121,27 @@ int game(SfmlWindow &myWindow) {
     load_sprites(sprite[1], backgound);
     load_sprites(sprite[2], planet);
     load_sprites(sprite[3], paul);
+    load_sprites(sprite[4], littlePlanet);
 
     sf::Vector2f velocity(-0.2f, 0.0f);
     sf::Vector2f velocity_paul(-0.6f, 0.0f);
+    sf::Vector2f velocity_littlePlanet(-0.1f, 0.0f);
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
 
     //Pause Button
 
     sf::RectangleShape playButton(sf::Vector2f(200, 50));
-    playButton.setPosition(300, 200);
+    playButton.setPosition(800, 400);
     playButton.setFillColor(sf::Color::Green);
 
     sf::RectangleShape quitButton(sf::Vector2f(200, 50));
-    quitButton.setPosition(300, 300);
+    quitButton.setPosition(800, 600);
     quitButton.setFillColor(sf::Color::Red);
+
+    sf::RectangleShape stopButton(sf::Vector2f(50, 50));
+    stopButton.setPosition(50, 50);
+    stopButton.setFillColor(sf::Color::Black);
 
     sf::Font font;
     if (!font.loadFromFile("./Client/Assets/Image/Arial.ttf")) {
@@ -141,13 +149,16 @@ int game(SfmlWindow &myWindow) {
     }
 
     sf::Text playText("Play", font, 30);
-    playText.setPosition(370, 210);
+    playText.setPosition(870, 410);
 
     sf::Text quitText("Quit", font, 30);
-    quitText.setPosition(370, 310);
+    quitText.setPosition(870, 610);
 
     sf::Text pauseText("Paused", font, 40);
-    pauseText.setPosition(350, 100);
+    pauseText.setPosition(840, 210);
+
+    sf::Text stopText("||", font, 30);
+    stopText.setPosition(50, 50);
 
     GameState gameState = GameState::Playing;
 
@@ -155,7 +166,7 @@ int game(SfmlWindow &myWindow) {
 
 
     while (myWindow.isOpen()) {
-        gameState = gameEvents(myWindow, gameState, playButton, quitButton);
+        gameState = gameEvents(myWindow, gameState, playButton, quitButton, stopButton);
         handleMouvement(&mySprite, my_input, &sprite[0]);
 
 
@@ -166,6 +177,7 @@ int game(SfmlWindow &myWindow) {
         if (gameState == GameState::Playing) {
             move(&sprite[2].my_sprite , velocity);
             move(&sprite[3].my_sprite, velocity_paul);
+            move(&sprite[4].my_sprite, velocity_littlePlanet);
 
 
             if (sprite[2].my_sprite.getPosition().x < -200) {
@@ -174,13 +186,17 @@ int game(SfmlWindow &myWindow) {
             if (sprite[3].my_sprite.getPosition().x < -200) {
                 sprite[3].setPosition(1920, 1010);
             }
+            if (sprite[4].my_sprite.getPosition().x < -200) {
+                sprite[4].setPosition(1920, std::rand() % 1080);
+            }
 
             missile.update(0.016f, mySprite.x, mySprite.y);
             myWindow.draw(sprite[1].my_sprite);
             myWindow.draw(sprite[2].my_sprite);
             myWindow.draw(sprite[3].my_sprite);
-            myWindow.drawShape(playButton);
-            myWindow.drawText(playText);
+            myWindow.draw(sprite[4].my_sprite);
+            myWindow.drawShape(stopButton);
+            myWindow.drawText(stopText);
             myWindow.draw(sprite[0].my_sprite);
             myWindow.drawShape(missile.shape);
         } else if (gameState == GameState::Paused) {
@@ -221,11 +237,11 @@ int mainLoop() {
     SfmlWindow myWindow(1920, 1080, "R-Type");
 
     sf::RectangleShape playButton(sf::Vector2f(200, 50));
-    playButton.setPosition(300, 200);
+    playButton.setPosition(800, 400);
     playButton.setFillColor(sf::Color::Green);
 
     sf::RectangleShape quitButton(sf::Vector2f(200, 50));
-    quitButton.setPosition(300, 300);
+    quitButton.setPosition(800, 600);
     quitButton.setFillColor(sf::Color::Red);
 
     sf::Font font;
@@ -234,10 +250,10 @@ int mainLoop() {
     }
 
     sf::Text playText("Play", font, 30);
-    playText.setPosition(370, 210);
+    playText.setPosition(870, 410);
 
     sf::Text quitText("Quit", font, 30);
-    quitText.setPosition(370, 310);
+    quitText.setPosition(870, 610);
 
     while (myWindow.isOpen()) {
         sf::Event event;

@@ -71,7 +71,7 @@ void handle_connection(boost::asio::ip::tcp::socket& socket) {
  *
  */
 
-void main() {
+int main() {
     try {
         boost::asio::io_service io_service;
         boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::tcp::v4(), 12345);
@@ -89,4 +89,5 @@ void main() {
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
+    return 0;
 }

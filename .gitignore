@@ -42,6 +42,9 @@ CMakePresets.json
 CMakeFiles
 .vscode
 
+vcpkg
+vcpkg_installed
+
 *.cmake
 R-TypeClient
 R-TypeServer

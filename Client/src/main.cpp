@@ -307,6 +307,8 @@ int events(SfmlWindow &myWindow, sf::RectangleShape playButton, sf::RectangleSha
 
 int mainLoop() {
     SfmlWindow myWindow(1920, 1080, "R-Type");
+    //Set framerate limit to 60
+    //myWindow.window.setFramerateLimit(60);
 
     sf::RectangleShape playButton(sf::Vector2f(200, 50));
     playButton.setPosition(800, 400);

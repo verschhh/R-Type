@@ -90,16 +90,20 @@ void handleMouvement(CSprite *mySprite, Input my_input, SpriteManager *sprite) {
      * @return void
     */
     if (my_input.isDPressed()) {
+        if (mySprite->x < 1850)
             mySprite->x = my_input.moveRight(mySprite->x, 0.8);
     }
     if (my_input.isQPressed()) {
-        mySprite->x = my_input.moveLeft(mySprite->x, 0.8);
+        if (mySprite->x > 0)
+            mySprite->x = my_input.moveLeft(mySprite->x, 0.8);
     }
     if (my_input.isZPressed()) {
-        mySprite->y = my_input.moveUp(mySprite->y, 0.8);
+        if (mySprite->y > 0)
+            mySprite->y = my_input.moveUp(mySprite->y, 0.8);
     }
     if (my_input.isSPressed()) {
-        mySprite->y = my_input.moveDown(mySprite->y, 0.8);
+        if (mySprite->y < 950)
+            mySprite->y = my_input.moveDown(mySprite->y, 0.8);
     }
     sprite->setPosition(mySprite->x, mySprite->y);
 }

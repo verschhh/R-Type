@@ -151,7 +151,6 @@ int main() {
 
     // create the sprite
     std::unique_ptr<Player> player(new Player(&registry, "./Client/Assets/Image/rick.png", 3));
-    int hp = 300;
     std::vector<std::unique_ptr<Enemy>> enemies;
     enemies = spawnNewWave(registry);
     while (myWindow.isOpen()) {

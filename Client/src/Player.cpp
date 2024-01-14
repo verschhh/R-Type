@@ -16,7 +16,7 @@ Player::Player(Registry *registry, std::string asset, int hp) : hitbox(0, 0 , 0 
      */
     this->registry = registry;
     input = Input();
-    initialCSprite = {100, 100, 0.2, 0.2, asset};
+    initialCSprite = {100, 500, 0.2, 0.2, asset};
     this->registry->add_component(entity, std::move(initialCSprite));
     auto &positionArray = this->registry->get_components<CSprite>();
     this->cSprite = positionArray[entity].value();

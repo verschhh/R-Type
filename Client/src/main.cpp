@@ -23,25 +23,25 @@ enum class GameState {
     Exit,
 };
 
-// int launch_music(Sound &music, std::string file) {
-//     /** launch_music
-//      * @brief Launch the music
-//      *
-//      * @param music : the music
-//      * @param file : the path to the music
-//      *
-//      * @return 0 if it is a success, -1 if it is not
-//     */
+int launch_music(Sound *music, std::string file) {
+    /** launch_music
+     * @brief Launch the music
+     *
+     * @param music : the music
+     * @param file : the path to the music
+     *
+     * @return 0 if it is a success, -1 if it is not
+    */
 
-//     if (!music.loadFromFileMusic(file)) {
-//         std::cout << "Invalid music file" << std::endl;
-//         return -1;
-//     }
-//     music.setVolumeMusic(10);
-//     music.musicLoop(true);
-//     music.playMusic();
-//     return 0;
-// }
+    if (!music->loadFromFileMusic(file)) {
+        std::cout << "Invalid music file" << std::endl;
+        return -1;
+    }
+    music->setVolumeMusic(10);
+    music->musicLoop(true);
+    music->playMusic();
+    return 0;
+}
 
 int load_sprites(SpriteManager &sprite, CSprite spriteChara) {
     /** load_sprites
@@ -75,19 +75,19 @@ void handleMouvement(CSprite *mySprite, Input my_input, SpriteManager *sprite) {
     */
     if (my_input.isDPressed()) {
         if (mySprite->x < 1850)
-            mySprite->x = my_input.moveRight(mySprite->x, 0.8);
+            mySprite->x = my_input.moveRight(mySprite->x, 1.0);
     }
     if (my_input.isQPressed()) {
         if (mySprite->x > 0)
-            mySprite->x = my_input.moveLeft(mySprite->x, 0.8);
+            mySprite->x = my_input.moveLeft(mySprite->x, 1.0);
     }
     if (my_input.isZPressed()) {
         if (mySprite->y > 0)
-            mySprite->y = my_input.moveUp(mySprite->y, 0.8);
+            mySprite->y = my_input.moveUp(mySprite->y, 1.0);
     }
     if (my_input.isSPressed()) {
         if (mySprite->y < 950)
-            mySprite->y = my_input.moveDown(mySprite->y, 0.8);
+            mySprite->y = my_input.moveDown(mySprite->y, 1.0);
     }
     sprite->setPosition(mySprite->x, mySprite->y);
 }
@@ -128,9 +128,9 @@ GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleSha
 std::vector<std::unique_ptr<Enemy>> spawnNewWave(Registry &registry) {
     /** spawnNewWave
      * @brief Spawn a new wave of enemies
-     * 
+     *
      * @param registry : the registry
-     * 
+     *
      * @return enemies : the enemies
     */
     std::vector<std::unique_ptr<Enemy>> enemies;
@@ -152,9 +152,11 @@ std::vector<std::unique_ptr<Enemy>> spawnNewWave(Registry &registry) {
 int game(SfmlWindow &myWindow) {
     Registry registry;
     SpriteManager sprite[4];
+    Sound music;
     Entity rick = registry.spawn_entity();
     registry.register_component<CSprite>();
     registry.register_component<Input>();
+    launch_music(&music, "./Client/Assets/Sounds/rick.ogg");
 
     // create the player and the enemies
     std::vector<std::unique_ptr<Enemy>> enemies;
@@ -205,6 +207,8 @@ int game(SfmlWindow &myWindow) {
 
     sf::Text stopText(" ||", font, 30);
     stopText.setPosition(50, 50);
+
+    sf::Text hello("HELLOOOOOOO !!!!!", font, 20);
 
     GameState gameState = GameState::Playing;
 
@@ -264,6 +268,9 @@ int game(SfmlWindow &myWindow) {
                 enemies = spawnNewWave(registry);
             myWindow.drawShape(stopButton);
             myWindow.drawText(stopText);
+
+            hello.setPosition(sprite[2].getPosition().x + 100, sprite[2].getPosition().y - 50);
+            myWindow.drawText(hello);
         } else if (gameState == GameState::Paused) {
             myWindow.drawText(pauseText);
             myWindow.drawShape(playButton);

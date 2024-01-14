@@ -12,6 +12,20 @@
     #include "HitBox.hpp"
 
     class Missile {
+        /**
+         * @brief Missile class
+         * 
+         * This class is used to handle the missiles
+         * 
+         * @param height : the height of the missile
+         * @param width : the width of the missile
+         * @param speed : the speed of the missile
+         * @param color : the color of the missile
+         * @param initialDirection : the initial direction of the missile
+         * @param ammo : the number of ammo
+         * 
+         * @return nothing
+         */
     public:
         Missile(float width, float height, float speed, sf::Color color, sf::Vector2f initialDirection, int ammo);
         int checkCollision(std::vector<HitBox> hitbox);

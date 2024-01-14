@@ -8,6 +8,15 @@
 #include "../include/Enemy.hpp"
 
 Enemy::Enemy(Registry *registry, std::string asset, int hp, float x, float y, int color) : hitbox(0, 0 , 0 , 0), entity(registry->spawn_entity()), missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(-1.0f, 0.0f), 3) {
+    /**
+     * @brief Eenemy constructor, it sets up the enemy, its sprite, its hitbox and its missile
+     * @param registry
+     * @param asset
+     * @param hp
+     * @param x
+     * @param y
+     * @param color
+     */
     this->registry = registry;
     initialCSprite = {x, y, 0.5, 0.5, asset};
     registry->add_component(entity, std::move(initialCSprite));
@@ -29,6 +38,12 @@ Enemy::Enemy(Registry *registry, std::string asset, int hp, float x, float y, in
 }
 
 int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {
+    /**
+     * @brief Loads the sprite of the enemy
+     * @param sprite
+     * @param spriteChara
+     * @return
+     */
     if (!sprite.loadFromFile(spriteChara.file)) {
         std::cout << "Invalid texture file" << std::endl;
         return -1;
@@ -40,6 +55,12 @@ int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {
 }
 
 void Enemy::update(float deltaTime, float x, float y) {
+    /**
+     * @brief Updates the enemy's position and its missile's position
+     * @param deltaTime
+     * @param x
+     * @param y
+     */
     if (cooldown.getElapsedTime().asSeconds() >= launchCooldown) {
         this->x -= 10;
         if (this->y < 50)
@@ -55,6 +76,10 @@ void Enemy::update(float deltaTime, float x, float y) {
 }
 
 void Enemy::draw(sf::RenderWindow& window) {
+    /**
+     * @brief Draws the enemy and its missile
+     * @param window
+     */
     cSprite.x = this->x;
     cSprite.y = this->y;
     update(0, cSprite.x, cSprite.y);

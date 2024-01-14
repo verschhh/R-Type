@@ -18,6 +18,26 @@
     #include "../../Server/include/Registry.hpp"
 
 class Player {
+    /**
+     * @brief Player class
+     * 
+     * This class is used to create a player
+     * 
+     * @param hitbox : the hitbox of the player
+     * @param entity : the entity of the player
+     * @param missile : the missile of the player
+     * @param initialCSprite : the initial sprite of the player
+     * @param cSprite : the current sprite of the player
+     * @param sprite : the sprite of the player
+     * @param rect : the rect of the player
+     * @param x : the x position of the player
+     * @param y : the y position of the player
+     * @param hp : the hp of the player
+     * @param registry : the registry
+     * @param asset : the path to the sprite
+     * @param hp : the hp of the player
+     * 
+     */
     public:
         Player(Registry *registry, std::string asset, int hp);
         ~Player();

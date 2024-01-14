@@ -17,6 +17,28 @@
     #include "../../Server/include/Registry.hpp"
 
 class Enemy {
+    /**
+     * @brief Enemy class
+     * 
+     * This class is used to create an enemy
+     * 
+     * @param hitbox : the hitbox of the enemy
+     * @param entity : the entity of the enemy
+     * @param missile : the missile of the enemy
+     * @param initialCSprite : the initial sprite of the enemy
+     * @param cSprite : the current sprite of the enemy
+     * @param sprite : the sprite of the enemy
+     * @param rect : the rect of the enemy
+     * @param cooldown : the cooldown of the enemy
+     * @param launchCooldown : the launch cooldown of the enemy
+     * @param x : the x position of the enemy
+     * @param y : the y position of the enemy
+     * @param hp : the hp of the enemy
+     * @param registry : the registry
+     * @param asset : the path to the sprite
+     * @param hp : the hp of the enemy
+     * 
+     */
     public:
         Enemy(Registry *registry, std::string asset, int hp, float x, float y, int Color);
         ~Enemy() = default;

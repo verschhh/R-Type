@@ -20,7 +20,16 @@
 
 void events(SfmlWindow &myWindow, std::vector<std::unique_ptr<Enemy>>& enemies, std::unique_ptr<Player>& player) {
     sf::Event event;
-
+    /** Event
+     * @brief Handle the events
+     * 
+     * @param event : the event
+     * @param myWindow : the window
+     * @param enemies : the enemies
+     * @param player : the player
+     * 
+     * @return void
+    */
     while (myWindow.pollEvent(event)) {
         if (myWindow.isClosedEvent(event)) {
             myWindow.close();
@@ -31,6 +40,15 @@ void events(SfmlWindow &myWindow, std::vector<std::unique_ptr<Enemy>>& enemies, 
 }
 
 int launch_music(Sound &music, std::string file) {
+    /** launch_music
+     * @brief Launch the music
+     * 
+     * @param music : the music
+     * @param file : the path to the music
+     * 
+     * @return 0 if it is a success, -1 if it is not
+    */
+
     if (!music.loadFromFileMusic(file)) {
         std::cout << "Invalid music file" << std::endl;
         return -1;
@@ -42,7 +60,16 @@ int launch_music(Sound &music, std::string file) {
 }
 
 int load_sprites(SpriteManager &sprite, CSprite spriteChara) {
-     if (!sprite.loadFromFile(spriteChara.file)) {
+    /** load_sprites
+     * @brief Loads the sprite
+     * 
+     * @param sprite : the sprite
+     * @param spriteChara : the spriteChara
+     * 
+     * @return 0 if it is a success, -1 if it is not
+    */
+
+    if (!sprite.loadFromFile(spriteChara.file)) {
         std::cout << "Invalid texture file" << std::endl;
         return -1;
     }
@@ -53,6 +80,15 @@ int load_sprites(SpriteManager &sprite, CSprite spriteChara) {
 }
 
 void handleMouvement(CSprite *mySprite, Input my_input, SpriteManager *sprite) {
+    /** handleMouvement
+     * @brief Handle the mouvement of the player
+     * 
+     * @param mySprite : the sprite of the player
+     * @param my_input : the input of the player
+     * @param sprite : the sprite of the player
+     * 
+     * @return void
+    */
     if (my_input.isDPressed()) {
             mySprite->x = my_input.moveRight(mySprite->x, 0.8);
     }
@@ -69,31 +105,16 @@ void handleMouvement(CSprite *mySprite, Input my_input, SpriteManager *sprite) {
 }
 
 std::vector<std::unique_ptr<Enemy>> spawnNewWave(Registry &registry) {
-   // srand(time(NULL));
-   // int random = rand() % 4;
+    /** spawnNewWave
+     * @brief Spawn a new wave of enemies
+     * 
+     * @param registry : the registry
+     * 
+     * @return enemies : the enemies
+    */
     std::vector<std::unique_ptr<Enemy>> enemies;
-   // if (random == 0) {
-   //     for (int i = 0; i < 5; ++i) {
-   //         float x = 1920.0f + (100  * (i + 1));
-   //         float y = 500 + (200 * (i + 1));
-   //         enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Felix.png", 1, x, y, 0));
-   //     }
-   // } else if (random == 1) {
-   //     for (int i = 0; i < 5; ++i) {
-   //         float x = 1920.0f + (100  * (i + 1));
-   //         float y = 0 + (200 * (i + 1));
-   //         enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Ben.png", 1, x, y, 1));
-   //     }
-   // } else {
-   //     for (int i = 0; i < 5; ++i) {
-   //         float x = 1920.0f + (100  * (i + 1));
-   //         float y = 800 + (50 * (i + 1));
-   //         enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Kentin.png", 1, x, y, 2));
-   //     }
-   // }
-   // return enemies;
-   srand(time(NULL));
-   for (int i = 0; i < 5; ++i) {
+    srand(time(NULL));
+    for (int i = 0; i < 5; ++i) {
         int random = rand() % 3;
         float x = 1920.0f;
         float y = 0 + (200 * (random  + i));
@@ -103,11 +124,19 @@ std::vector<std::unique_ptr<Enemy>> spawnNewWave(Registry &registry) {
             enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Ben.png", 1, x, y, 1));
         else
             enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Kentin.png", 1, x, y, 2));
-   }
+    }
     return enemies;
 }
 
 int main() {
+    /** main
+     * @brief Main function
+     * 
+     * a function that launch the game and handle the events and the mouvement of the player and the enemies and the music and the wave of enemies and the collision between the player and the enemies and the collision between the player and the enemies' missiles and the collision between the enemies and the player's missiles 
+     * 
+     * @return 0 if it is a success, -1 if it is not
+    */
+
     // create the window
     SfmlWindow myWindow(1920, 1080, "R-Type");
 

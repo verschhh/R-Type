@@ -40,7 +40,7 @@ rtype_client
 conan*
 CMakePresets.json
 CMakeFiles
-.vscode
+.vscode/settings.json
 
 *.cmake
 R-TypeClient

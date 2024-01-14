@@ -31,14 +31,9 @@ Just run the following command at the root of your project and answer questions:
 And then run the different part of the project:
 
 <h2>Server: </h2>
-<<<<<<< HEAD
 
 ```sh
 ./R-TypeServer
-=======
-```
-./build.sh
->>>>>>> 6bf68fe (feat(UI) center button on the middle of the screen and create a pause button)
 ```
 
 <h2>Client: </h2>

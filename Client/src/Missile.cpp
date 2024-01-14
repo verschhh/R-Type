@@ -76,7 +76,9 @@ void Missile::launch(float x, float y, sf::Vector2f direction) {
      * @param y
      * @param direction
      */
-    missiles[currentAmmo].setPosition(x, y);
+    if (currentAmmo >= 0 && currentAmmo < 3) {
+        missiles[currentAmmo].setPosition(x, y);
+    }
     missileDirection = direction;
 }
 

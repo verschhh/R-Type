@@ -151,13 +151,13 @@ int main() {
 
     // create the sprite
     std::unique_ptr<Player> player(new Player(&registry, "./Client/Assets/Image/rick.png", 3));
+    int hp = 300;
     std::vector<std::unique_ptr<Enemy>> enemies;
     enemies = spawnNewWave(registry);
     while (myWindow.isOpen()) {
         events(myWindow, enemies, player);
         if (player) {
-            if (player->hp > 0)
-                handleMouvement(&player->cSprite, player->input, &player->sprite);
+            handleMouvement(&player->cSprite, player->input, &player->sprite);
         }
         myWindow.clear();
 
@@ -167,7 +167,7 @@ int main() {
                     std::cout << "Player hp go down" << std::endl;
                     player->hp -= 1;
                     enemy->hp = 0;
-                    enemy->cSprite.y = -1000; // Move the enemy out of the screen
+                    enemy->cSprite.y = -1000;
                 }
                 if (enemy->hp > 0) {
                     enemy->draw(myWindow.window);
@@ -178,8 +178,11 @@ int main() {
                 }
             }
         }
-        if (player->hp > 0)
-            player->draw(myWindow.window);
+        if (player) {
+            if (player->hp > 0) {
+                player->draw(myWindow.window);
+            }
+        }
 
         // Check if all enemies are dead
         bool allEnemiesDead = std::all_of(enemies.begin(), enemies.end(), [](const std::unique_ptr<Enemy>& enemy) { return enemy->hp == 0; });

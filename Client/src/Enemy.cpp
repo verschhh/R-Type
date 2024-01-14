@@ -32,9 +32,9 @@ Enemy::Enemy(Registry *registry, std::string asset, int hp, float x, float y, in
     if (color == 0)
         missile = Missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(-1.0f, 0.0f), 3);
     else if (color == 1)
-        missile = Missile(40.0f, 80.0f, 200.0f, sf::Color::Blue, sf::Vector2f(-1.0f, 0.0f), 2);
+        missile = Missile(40.0f, 80.0f, 200.0f, sf::Color::Blue, sf::Vector2f(-1.0f, 0.0f), 3);
     else
-        missile = Missile(60.0f, 60.0f, 100.0f, sf::Color::Green, sf::Vector2f(-1.0f, 0.0f), 2);
+        missile = Missile(60.0f, 60.0f, 100.0f, sf::Color::Green, sf::Vector2f(-1.0f, 0.0f), 3);
 }
 
 int Enemy::load_sprites(SpriteManager &sprite, CSprite spriteChara) {

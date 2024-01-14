@@ -259,6 +259,9 @@ int game(SfmlWindow &myWindow) {
                     player->draw(myWindow.window);
                 }
             }
+            bool allEnemiesDead = std::all_of(enemies.begin(), enemies.end(), [](const std::unique_ptr<Enemy>& enemy) { return enemy->hp == 0; });
+            if (allEnemiesDead)
+                enemies = spawnNewWave(registry);
             myWindow.drawShape(stopButton);
             myWindow.drawText(stopText);
         } else if (gameState == GameState::Paused) {

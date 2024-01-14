@@ -23,33 +23,33 @@ enum class GameState {
     Exit,
 };
 
-int launch_music(Sound &music, std::string file) {
-    /** launch_music
-     * @brief Launch the music
-     * 
-     * @param music : the music
-     * @param file : the path to the music
-     * 
-     * @return 0 if it is a success, -1 if it is not
-    */
+// int launch_music(Sound &music, std::string file) {
+//     /** launch_music
+//      * @brief Launch the music
+//      *
+//      * @param music : the music
+//      * @param file : the path to the music
+//      *
+//      * @return 0 if it is a success, -1 if it is not
+//     */
 
-    if (!music.loadFromFileMusic(file)) {
-        std::cout << "Invalid music file" << std::endl;
-        return -1;
-    }
-    music.setVolumeMusic(10);
-    music.musicLoop(true);
-    music.playMusic();
-    return 0;
-}
+//     if (!music.loadFromFileMusic(file)) {
+//         std::cout << "Invalid music file" << std::endl;
+//         return -1;
+//     }
+//     music.setVolumeMusic(10);
+//     music.musicLoop(true);
+//     music.playMusic();
+//     return 0;
+// }
 
 int load_sprites(SpriteManager &sprite, CSprite spriteChara) {
     /** load_sprites
      * @brief Loads the sprite
-     * 
+     *
      * @param sprite : the sprite
      * @param spriteChara : the spriteChara
-     * 
+     *
      * @return 0 if it is a success, -1 if it is not
     */
 
@@ -66,11 +66,11 @@ int load_sprites(SpriteManager &sprite, CSprite spriteChara) {
 void handleMouvement(CSprite *mySprite, Input my_input, SpriteManager *sprite) {
     /** handleMouvement
      * @brief Handle the mouvement of the player
-     * 
+     *
      * @param mySprite : the sprite of the player
      * @param my_input : the input of the player
      * @param sprite : the sprite of the player
-     * 
+     *
      * @return void
     */
     if (my_input.isDPressed()) {
@@ -125,41 +125,57 @@ GameState gameEvents(SfmlWindow &myWindow, GameState gameState, sf::RectangleSha
     return gameState;
 }
 
+std::vector<std::unique_ptr<Enemy>> spawnNewWave(Registry &registry) {
+    /** spawnNewWave
+     * @brief Spawn a new wave of enemies
+     * 
+     * @param registry : the registry
+     * 
+     * @return enemies : the enemies
+    */
+    std::vector<std::unique_ptr<Enemy>> enemies;
+    srand(time(NULL));
+    for (int i = 0; i < 5; ++i) {
+        int random = rand() % 3;
+        float x = 1920.0f;
+        float y = 0 + (200 * (random  + i));
+        if (random == 0)
+            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Felix.png", 1, x, y, 0));
+        else if (random == 1)
+            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Ben.png", 1, x, y, 1));
+        else
+            enemies.push_back(std::make_unique<Enemy>(&registry, "./Client/Assets/Image/Kentin.png", 1, x, y, 2));
+    }
+    return enemies;
+}
+
 int game(SfmlWindow &myWindow) {
-    Missile missile(40.0f, 20.0f, 200.0f, sf::Color::Red, sf::Vector2f(1.0f, 0.0f));
     Registry registry;
+    SpriteManager sprite[4];
+    Entity rick = registry.spawn_entity();
     registry.register_component<CSprite>();
     registry.register_component<Input>();
 
-    CSprite initialRick = {0.0, 0.0, 0.5, 0.5, "./Client/Assets/Image/rick.png"};
+    // create the player and the enemies
+    std::vector<std::unique_ptr<Enemy>> enemies;
+    enemies = spawnNewWave(registry);
+    std::unique_ptr<Player> player = std::make_unique<Player>(registry, rick);
+
+    // load the sprites
     CSprite backgound = {0.0, 0.0, 1, 1, "./Client/Assets/Image/star.jpg"};
     CSprite planet = {200.0, 100.0, 0.2, 0.2, "./Client/Assets/Image/planets.png"};
     CSprite paul = {400.0, 1010, 1, 1, "./Client/Assets/Image/paul.png"};
     CSprite littlePlanet{600.0, 754, 0.1, 0.1, "./Client/Assets/Image/planets.png"};
-    Input input;
 
-    registry.add_component(rick, std::move(initialRick));
-    registry.add_component(rick, std::move(input));
-
-    auto &positionArray = registry.get_components<CSprite>();
-    auto &inputArray = registry.get_components<Input>();
-
-    CSprite mySprite = positionArray[rick].value();
-    Input my_input = inputArray[rick].value();
-
-    load_sprites(sprite[0], mySprite);
-    load_sprites(sprite[1], backgound);
-    load_sprites(sprite[2], planet);
-    load_sprites(sprite[3], paul);
-    load_sprites(sprite[4], littlePlanet);
+    load_sprites(sprite[0], backgound);
+    load_sprites(sprite[1], planet);
+    load_sprites(sprite[2], paul);
+    load_sprites(sprite[3], littlePlanet);
 
     sf::Vector2f velocity(-0.2f, 0.0f);
     sf::Vector2f velocity_paul(-0.6f, 0.0f);
     sf::Vector2f velocity_littlePlanet(-0.1f, 0.0f);
     std::srand(static_cast<unsigned>(std::time(nullptr)));
-
-
-    //Pause Button
 
     sf::RectangleShape playButton(sf::Vector2f(200, 50));
     playButton.setPosition(800, 400);
@@ -192,68 +208,64 @@ int game(SfmlWindow &myWindow) {
 
     GameState gameState = GameState::Playing;
 
-
-
-
     while (myWindow.isOpen()) {
-        gameState = gameEvents(myWindow, gameState, playButton, quitButton, stopButton, enemies, player);
-        if (player) {
-            handleMouvement(&player->cSprite, player->input, &player->sprite[0]);
-        }
+        // gameState = gameEvents(myWindow, gameState, playButton, quitButton, stopButton, enemies, player);
+        gameState = gameEvents(myWindow, gameState, playButton, quitButton, stopButton);
+         if (player) {
+             handleMouvement(&player->cSprite, player->input, &player->sprite);
+         }
         myWindow.clear();
-
-        for (auto& enemy : enemies) {
-            if (enemy) {
-                if (enemy->cSprite.x < 0) {
-                    std::cout << "Player hp go down" << std::endl;
-                    player->hp -= 1;
-                    enemy->hp = 0;
-                    enemy->cSprite.y = -1000;
-                }
-                if (enemy->hp > 0) {
-                    enemy->draw(myWindow.window);
-                    if (player->missile.checkCollision({enemy->hitbox}) == true)
-                        enemy->hp -= 1;
-                    if (enemy->missile.checkCollision({player->hitbox}) == true)
-                        player->hp -= 1;
-                }
-            }
-        }
+//         for (auto& enemy : enemies) {
+//             if (enemy) {
+//                 if (enemy->cSprite.x < 0) {
+//                     std::cout << "Player hp go down" << std::endl;
+//                     player->hp -= 1;
+//                     enemy->hp = 0;
+//                     enemy->cSprite.y = -1000;
+//                 }
+//                 if (enemy->hp > 0) {
+//                     enemy->draw(myWindow.window);
+//                     if (player->missile.checkCollision({enemy->hitbox}) == true)
+//                         enemy->hp -= 1;
+//                     if (enemy->missile.checkCollision({player->hitbox}) == true)
+//                         player->hp -= 1;
+//                 }
+//             }
+//         }
         if (player) {
             if (player->hp > 0) {
                 player->draw(myWindow.window);
             }
         }
 
-        myWindow.clear();
         if (gameState == GameState::Exit) {
             return -1;
         }
         if (gameState == GameState::Playing) {
-            move(&sprite[2].my_sprite , velocity);
-            move(&sprite[3].my_sprite, velocity_paul);
-            move(&sprite[4].my_sprite, velocity_littlePlanet);
+            move(&sprite[1].my_sprite , velocity);
+            move(&sprite[2].my_sprite, velocity_paul);
+            move(&sprite[3].my_sprite, velocity_littlePlanet);
 
 
+            if (sprite[1].my_sprite.getPosition().x < -200) {
+                sprite[1].setPosition(1920, std::rand() % 1080);
+            }
             if (sprite[2].my_sprite.getPosition().x < -200) {
-                sprite[2].setPosition(1920, std::rand() % 1080);
+                sprite[2].setPosition(1920, 1010);
             }
             if (sprite[3].my_sprite.getPosition().x < -200) {
-                sprite[3].setPosition(1920, 1010);
-            }
-            if (sprite[4].my_sprite.getPosition().x < -200) {
-                sprite[4].setPosition(1920, std::rand() % 1080);
+                sprite[3].setPosition(1920, std::rand() % 1080);
             }
 
-            missile.update(0.016f, mySprite.x, mySprite.y);
+            // missile.update(0.016f, mySprite.x, mySprite.y);
+            myWindow.draw(sprite[0].my_sprite);
             myWindow.draw(sprite[1].my_sprite);
             myWindow.draw(sprite[2].my_sprite);
             myWindow.draw(sprite[3].my_sprite);
-            myWindow.draw(sprite[4].my_sprite);
             myWindow.drawShape(stopButton);
             myWindow.drawText(stopText);
-            myWindow.draw(sprite[0].my_sprite);
-            myWindow.drawShape(missile.shape);
+            // myWindow.draw(sprite[0].my_sprite);
+            // myWindow.drawShape(missile.shape);
         } else if (gameState == GameState::Paused) {
             myWindow.drawText(pauseText);
             myWindow.drawShape(playButton);
